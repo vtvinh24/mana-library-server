@@ -1,0 +1,37 @@
+services:
+  db:
+    image: db:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: ManaLibrary
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database/import.sh:/docker-entrypoint-initdb.d/import.sh
+      - ./database/data:/docker-entrypoint-initdb.d/data
+    networks:
+      - network
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+
+  server:
+    image: server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    env_file:
+      - ./dev.env
+    ports:
+      - "8000:8000"
+    networks:
+      - network
+    depends_on:
+      - db
+
+networks:
+  network:
+    driver: bridge

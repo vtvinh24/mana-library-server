@@ -1,0 +1,10 @@
+Digital Library Management:
+1. Required features:
+- Manage books
+- Manage users
+- Borrow/return books
+- Borrow history
+
+2. Extended features
+- Suggest books based on user fields: language, favorite genres, recent read books
+- Charge fees on borrowing or returning late

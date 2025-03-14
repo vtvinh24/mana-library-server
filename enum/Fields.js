@@ -1,0 +1,79 @@
+// Some of the fields are defined in another file
+const { ROLE: ROLES } = require("./Role");
+
+// Generic
+
+// User
+const ROLE = [ROLES.MEMBER, ROLES.LIBRARIAN, ROLES.ADMIN];
+const LANGUAGE = ["ENGLISH", "VIETNAMESE", "FRENCH", "SPANISH", "GERMAN", "CHINESE", "JAPANESE", "KOREAN", "RUSSIAN", "ARABIC"];
+
+// Book
+const BOOK_STATUS = ["AVAILABLE", "BORROWED", "RESERVED", "LOST"];
+const BOOK_CONDITION = ["NEW", "GOOD", "FAIR", "POOR"];
+const BOOK_GENRE = [
+  "FICTION",
+  "MYSTERY",
+  "THRILLER",
+  "ROMANCE",
+  "SCIENCE_FICTION",
+  "FANTASY",
+  "HORROR",
+  "HISTORICAL_FICTION",
+  "BIOGRAPHY",
+  "AUTOBIOGRAPHY",
+  "MEMOIR",
+  "SELF_HELP",
+  "BUSINESS",
+  "PHILOSOPHY",
+  "RELIGION",
+  "POETRY",
+  "DRAMA",
+  "ADVENTURE",
+  "YOUNG_ADULT",
+  "CHILDREN",
+  "SCIENCE",
+  "HISTORY",
+  "TRAVEL",
+  "COOKING",
+  "ART",
+  "MUSIC",
+  "SPORTS",
+  "TECHNOLOGY",
+  "EDUCATION",
+  "REFERENCE",
+];
+
+// Dewey Decimal Classification main categories
+const DEWEY_DECIMAL_CATEGORIES = [
+  "000_GENERAL_KNOWLEDGE",
+  "100_PHILOSOPHY_PSYCHOLOGY",
+  "200_RELIGION",
+  "300_SOCIAL_SCIENCES",
+  "400_LANGUAGE",
+  "500_SCIENCE",
+  "600_TECHNOLOGY",
+  "700_ARTS_RECREATION",
+  "800_LITERATURE",
+  "900_HISTORY_GEOGRAPHY",
+];
+
+// Media Types for library content
+const MEDIA_TYPE = ["EBOOK", "AUDIOBOOK", "DOCUMENT", "VIDEO", "IMAGE", "AUDIO", "INTERACTIVE", "DATASET", "SUPPLEMENTARY"];
+
+// File formats
+const MEDIA_FORMAT = ["PDF", "EPUB", "MOBI", "MP3", "MP4", "JPEG", "PNG", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "HTML", "ZIP", "RAR"];
+
+// Notification
+const NOTIFICATION_STATUS = ["SENT", "SEEN"];
+
+module.exports = {
+  ROLE,
+  NOTIFICATION_STATUS,
+  LANGUAGE,
+  BOOK_STATUS,
+  BOOK_CONDITION,
+  BOOK_GENRE,
+  DEWEY_DECIMAL_CATEGORIES,
+  MEDIA_TYPE,
+  MEDIA_FORMAT,
+};

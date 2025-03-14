@@ -1,0 +1,55 @@
+{
+  "name": "mana-library",
+  "version": "1.0.0",
+  "description": "A library management application created using express.js framework",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node --env-file=dev.env --watch app.js",
+    "test": "jest",
+    "start": "cross-env NODE_ENV=production node --env-file=prod.env app.js",
+    "lint": "eslint . --ext .js"
+  },
+  "keywords": [
+    "library",
+    "books",
+    "management",
+    "app",
+    "server"
+  ],
+  "author": "vtvinh24",
+  "license": "ISC",
+  "dependencies": {
+    "apicache": "^1.6.3",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "date-fns": "^4.1.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^8.0.0",
+    "hi-base32": "^0.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.14.2",
+    "mongoose": "^8.12.1",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.10.0",
+    "otpauth": "^9.3.6",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  },
+  "imports": {
+    "#assets/*": "./assets/*",
+    "#common/*": "./common/*",
+    "#config/*": "./config/*",
+    "#enum/*": "./enum/*",
+    "#middlewares/*": "./middlewares/*",
+    "#models/*": "./models/*",
+    "#modules/*": "./modules/*",
+    "#routes/*": "./routes/*",
+    "#services/*": "./services/*",
+    "#root/*": "./*"
+  }
+}
