@@ -20,7 +20,7 @@
 - `POST /api/v1/books/:bookId/borrow` - Borrow a book
 - `POST /api/v1/books/:bookId/return` - Return a book
 - `POST /api/v1/books/:bookId/reserve` - Reserve a book
-- `POST /api/v1/books/:bookId/cancel-reservation` - Cancel reservation
+- `DELETE /api/v1/books/:bookId/cancel-reservation` - Cancel reservation
 - `GET /api/v1/books/borrowed` - Get user's borrowed books
 - `GET /api/v1/books/reserved` - Get user's reserved books
 - `GET /api/v1/books/borrowed/:userId` - Get books borrowed by specific user (admin/librarian)

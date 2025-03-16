@@ -5,39 +5,18 @@ const { ROLE } = require("#enum/Role.js");
 const { requireRoles, requireAuth } = require("#middlewares/JWT.js");
 
 // Routes
-// CRUD
+// CRUD - list all
 const { getBooks } = require("./GetBooks");
 router.get("/", getBooks);
 
 const { createBook } = require("./CreateBook");
 router.post("/", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), createBook);
 
-const { deleteBook } = require("./DeleteBook");
-router.delete("/:bookId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), deleteBook);
-
-const { updateBook } = require("./UpdateBook");
-router.patch("/:bookId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), updateBook);
-
-// Search
+// Search - must be before parameterized routes to avoid conflicts
 const { searchBooks } = require("./SearchBooks");
 router.get("/search", searchBooks);
 
-// Borrow
-const { borrowBook } = require("./BorrowBook");
-router.post("/:bookId/borrow", requireAuth, borrowBook);
-
-// Return
-const { returnBook } = require("./ReturnBook");
-router.post("/:bookId/return", requireAuth, returnBook);
-
-// Reserve
-const { reserveBook } = require("./ReserveBook");
-router.post("/:bookId/reserve", requireAuth, reserveBook);
-
-// Cancel Reservation
-const { cancelReservation } = require("./CancelReservation");
-router.post("/:bookId/cancel-reservation", requireAuth, cancelReservation);
-
+// BORROWED and RESERVED routes - must be before /:bookId route
 // Get Borrowed Books
 const { getBorrowedBooks } = require("./GetBorrowedBooks");
 router.get("/borrowed", requireAuth, getBorrowedBooks);
@@ -53,5 +32,43 @@ router.get("/borrowed/:userId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getB
 // Get Reserved Books by User
 const { getReservedBooksByUser } = require("./GetReservedBooksByUser");
 router.get("/reserved/:userId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getReservedBooksByUser);
+
+// Statistics - Admin only
+const { getBookStats } = require("./BookStats");
+router.get("/stats", requireRoles([ROLE.ADMIN]), getBookStats);
+
+// Import/Export books
+const { importBooks, handleFileUpload } = require("./ImportBooks");
+router.post("/import", requireRoles([ROLE.ADMIN]), handleFileUpload, importBooks);
+
+const { exportBooks } = require("./ExportBooks");
+router.get("/export", requireRoles([ROLE.ADMIN]), exportBooks);
+
+// INDIVIDUAL BOOK ROUTE - must come after all specific routes to avoid conflicts
+const { getBookById } = require("./GetBookById");
+router.get("/:bookId", getBookById);
+
+// CRUD operations on specific book
+const { deleteBook } = require("./DeleteBook");
+router.delete("/:bookId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), deleteBook);
+
+const { updateBook } = require("./UpdateBook");
+router.patch("/:bookId", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), updateBook);
+
+// Borrow
+const { borrowBook } = require("./BorrowBook");
+router.post("/:bookId/borrow", requireAuth, borrowBook);
+
+// Return
+const { returnBook } = require("./ReturnBook");
+router.post("/:bookId/return", requireAuth, returnBook);
+
+// Reserve
+const { reserveBook } = require("./ReserveBook");
+router.post("/:bookId/reserve", requireAuth, reserveBook);
+
+// Cancel Reservation - changed from POST to DELETE for RESTful consistency
+const { cancelReservation } = require("./CancelReservation");
+router.delete("/:bookId/reservation", requireAuth, cancelReservation);
 
 module.exports = router;

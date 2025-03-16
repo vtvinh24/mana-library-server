@@ -12,7 +12,7 @@ function useCLI() {
   rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "Server> ",
+    prompt: "",
   });
 
   // Don't prompt immediately - wait for initialization logs

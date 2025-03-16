@@ -1,14 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
+// Root API endpoint
 router.use("/", require("./_root"));
+
+// Authentication routes - login, register, reset, verify, 2FA
 router.use("/auth", require("./auth"));
-// router.use("/media", require("./media"));
-// router.use("/notifications", require("./notifications"));
-router.use("/users", require("./users"));
+
+// Book management routes - CRUD, search, borrow, reserve
 router.use("/books", require("./books"));
-router.use("/admins", require("./admin"));
-// router.use("/rooms", require("./rooms"));
-// router.use("/games", require("./games"));
+
+// User management routes - profiles, favorites, notifications
+router.use("/users", require("./users"));
+
+// Admin dashboard and metrics
+router.use("/admin", require("./admin"));
 
 module.exports = router;
