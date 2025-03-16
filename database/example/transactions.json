@@ -1,0 +1,13 @@
+{
+  "userId": "60d21b4667d0d8992e610c88",
+  "amount": 5.5,
+  "date": "2023-08-10T15:20:00.000Z",
+  "type": "fine_payment",
+  "description": "Payment for overdue book: 'The Great Gatsby'",
+  "relatedRecord": {
+    "type": "book",
+    "id": "60d21b4667d0d8992e610c89"
+  },
+  "paymentMethod": "credit_card",
+  "externalTransactionId": "pmt_28b4s29dkl29s"
+}

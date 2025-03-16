@@ -57,8 +57,8 @@ const register = async (req, res) => {
     await newUser.save();
 
     const filtered = filteredUser(newUser);
-    const token = createToken(user._id, Env.JWT_EXPIRES_IN);
-    const refreshToken = createToken(user._id, Env.JWT_REFRESH_EXPIRES_IN);
+    const token = createToken(newUser._id, Env.JWT_EXPIRES_IN);
+    const refreshToken = createToken(newUser._id, Env.JWT_REFRESH_EXPIRES_IN);
     if (email) {
       try {
         const subject = "Welcome to ManaLibrary";

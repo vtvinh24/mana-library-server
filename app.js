@@ -17,7 +17,7 @@ app.use("/api", api);
 let port = Env.APP_PORT || 8000;
 const server = app
   .listen(port, () => {
-    log(`Server is running on port ${port}`, "DEBUG", "Server");
+    log(`Server is running on port ${port}`, "INFO", "Server");
   })
   .on("error", handleServerError);
 

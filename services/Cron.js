@@ -41,7 +41,7 @@ function initializeCronJobs() {
       }
     });
 
-    log(`\nDeployed cron jobs. \n\t\x1b[31m${failed} failed\x1b[0m\n\t\x1b[32m${success} success\x1b[0m\n\t\x1b[33m${skipped} skipped\x1b[0m\n\t\x1b[34m${count} total\x1b[0m`, "DEBUG", "node-cron");
+    log(`Deployed cron jobs. \n\t\x1b[31m${failed} failed\x1b[0m\n\t\x1b[32m${success} success\x1b[0m\n\t\x1b[33m${skipped} skipped\x1b[0m\n\t\x1b[34m${count} total\x1b[0m`, "INFO", "node-cron");
   });
 }
 

@@ -1,0 +1,20 @@
+{
+  "title": "The Design of Everyday Things",
+  "author": "Don Norman",
+  "ISBN": "978-0-465-05065-9",
+  "publisher": "Basic Books",
+  "publicationYear": 2013,
+  "genre": ["Design", "Psychology", "Non-fiction"],
+  "description": "A powerful primer on how and why some products satisfy customers while others frustrate them.",
+  "pages": 368,
+  "language": "English",
+  "coverImage": "/images/covers/design-everyday-things.jpg",
+  "location": "Design Section, Shelf D4",
+  "status": "available",
+  "condition": "good",
+  "copies": 2,
+  "acquisitionDate": "2023-04-15T00:00:00.000Z",
+  "price": 18.99,
+  "deweyDecimal": "745.4",
+  "tags": ["usability", "cognitive psychology", "user experience", "human-centered design"]
+}

@@ -13,7 +13,7 @@ function loadCommands() {
     // Get all JS files in the commands directory
     const commandFiles = fs.readdirSync(commandsDir).filter((file) => file.endsWith(".js"));
 
-    log(`Found ${commandFiles.length} command files`, "DEBUG", "CommandLoader");
+    log(`Found ${commandFiles.length} command files`, "INFO", "CommandLoader");
 
     // Load each command file
     commandFiles.forEach((file) => {
