@@ -1,85 +1,136 @@
-const { log } = require("#common/Logger.js");
 const Book = require("#models/Book.js");
 const User = require("#models/User.js");
+const Reservation = require("#models/Reservation.js");
+const { startSession } = require("mongoose");
 
-/**
- * Reserve a book from the library
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- */
 const reserveBook = async (req, res) => {
-  try {
-    const { bookId } = req.params;
-    const userId = req.userId;
+  const session = await startSession();
+  session.startTransaction();
 
-    // Find book
-    const book = await Book.findById(bookId);
+  try {
+    const { userId, bookId } = req.body;
+
+    if (!userId || !bookId) {
+      return res.status(400).json({ message: "User ID and Book ID are required" });
+    }
+
+    // Find book and user with session to prevent race conditions
+    const book = await Book.findById(bookId).session(session);
+    const user = await User.findById(userId).session(session);
+
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    // Check if book is available to reserve
-    if (book.status !== "available") {
-      return res.status(400).json({ message: `Book is not available for reservation (current status: ${book.status})` });
-    }
-
-    // Find user
-    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if user already has this book reserved
-    const existingReservation = user.library.reservedBooks.find((item) => item.book.toString() === bookId && item.status === "ACTIVE");
-
-    if (existingReservation) {
-      return res.status(400).json({ message: "You already have this book reserved" });
+    // Check if user has unpaid fines
+    if (user.library.fines > 0) {
+      return res.status(403).json({
+        message: "You have unpaid fines",
+        amount: user.library.fines,
+        redirectTo: "/pay-fines",
+      });
     }
 
-    // Add book to user's reserved books
-    user.library.reservedBooks.push({
+    // Check if user already borrowed this book
+    const alreadyBorrowed = user.library.borrowed.some((item) => item.book.toString() === bookId);
+
+    if (alreadyBorrowed) {
+      return res.status(400).json({ message: "You already have this book" });
+    }
+
+    // Check if user already reserved this book
+    const existingReservation = await Reservation.findOne({
+      user: userId,
       book: bookId,
-      reservationDate: new Date(),
-      expirationDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
-      status: "ACTIVE",
+      status: { $in: ["pending", "ready"] },
+    }).session(session);
+
+    if (existingReservation) {
+      return res.status(400).json({ message: "You already have a reservation for this book" });
+    }
+
+    // Check reservation limit
+    const activeReservations = await Reservation.countDocuments({
+      user: userId,
+      status: { $in: ["pending", "ready"] },
+    }).session(session);
+
+    const reservationLimit = user.library.membershipTier === "premium" ? 5 : 3;
+    if (activeReservations >= reservationLimit) {
+      return res.status(403).json({ message: "You have reached your reservation limit" });
+    }
+
+    // Create reservation with expiry
+    const expiryDays = 3; // Reservations expire after 3 days once ready
+    const reservation = new Reservation({
+      user: userId,
+      book: bookId,
+      status: book.status === "available" ? "ready" : "pending",
+      createdAt: new Date(),
+      notifiedAt: book.status === "available" ? new Date() : null,
+      expiresAt: book.status === "available" ? new Date(new Date().getTime() + expiryDays * 24 * 60 * 60 * 1000) : null,
     });
 
-    // Update book status
-    book.status = "reserved";
+    // If book is available, mark it as reserved
+    if (book.status === "available") {
+      book.status = "reserved";
+      await book.save({ session });
+    }
 
-    // Save changes
-    await Promise.all([user.save(), book.save()]);
+    await reservation.save({ session });
 
-    // Send email notification
-    try {
-      await sendMail({
-        to: user.email,
-        subject: "Book Reservation Confirmation",
-        text: `You have successfully reserved "${book.title}" by ${book.author}. Please pick it up within 3 days.`,
-        html: `<p>You have successfully reserved "<strong>${book.title}</strong>" by ${book.author}.</p>
-               <p>Please pick it up within <strong>3 days</strong>.</p>`,
-      });
-    } catch (emailError) {
-      log(`Failed to send reservation email: ${emailError.message}`, "ERROR", "routes POST /books/:bookId/reserve");
-      // Continue execution even if email fails
+    await session.commitTransaction();
+    session.endSession();
+
+    // Schedule expiration check task (in a production app, this would be handled by a job scheduler)
+    if (reservation.status === "ready") {
+      setTimeout(async () => {
+        try {
+          const expiredReservation = await Reservation.findById(reservation._id);
+          if (expiredReservation && expiredReservation.status === "ready") {
+            expiredReservation.status = "expired";
+            await expiredReservation.save();
+
+            // Check if book needs status update
+            const book = await Book.findById(bookId);
+            const pendingReservations = await Reservation.find({
+              book: bookId,
+              status: "pending",
+            }).sort({ createdAt: 1 });
+
+            if (pendingReservations.length > 0) {
+              // Update next reservation to ready
+              const nextReservation = pendingReservations[0];
+              nextReservation.status = "ready";
+              nextReservation.notifiedAt = new Date();
+              nextReservation.expiresAt = new Date(new Date().getTime() + expiryDays * 24 * 60 * 60 * 1000);
+              await nextReservation.save();
+            } else if (book.status === "reserved") {
+              // No more reservations, mark as available
+              book.status = "available";
+              await book.save();
+            }
+          }
+        } catch (error) {
+          console.error("Error processing reservation expiration:", error);
+        }
+      }, expiryDays * 24 * 60 * 60 * 1000);
     }
 
     return res.status(201).json({
-      message: "Book reserved successfully",
-      reservation: {
-        book: {
-          id: book._id,
-          title: book.title,
-          author: book.author,
-          coverImage: book.coverImage,
-        },
-        reservationDate: user.library.reservedBooks[user.library.reservedBooks.length - 1].reservationDate,
-        expirationDate: user.library.reservedBooks[user.library.reservedBooks.length - 1].expirationDate,
-      },
+      message: `Book ${reservation.status === "ready" ? "ready for pickup" : "reserved successfully"}`,
+      status: reservation.status,
+      expiresAt: reservation.expiresAt,
     });
-  } catch (err) {
-    log(err.message, "ERROR", "routes POST /books/:bookId/reserve");
-    return res.status(500).json({ message: "Internal server error" });
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    console.error("Error reserving book:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

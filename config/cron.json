@@ -10,5 +10,13 @@
   "ServiceStatus": {
     "enabled": false,
     "cron": "* * * * * *"
+  },
+  "ReservationProcessor": {
+    "enabled": true,
+    "cron": "*/10 * * * *"
+  },
+  "DueDateNotifier": {
+    "enabled": true,
+    "cron": "0 9 * * *"
   }
 }

@@ -1,95 +1,179 @@
-const { log } = require("#common/Logger.js");
+const mongoose = require("mongoose");
 const Book = require("#models/Book.js");
 const User = require("#models/User.js");
-const { sendMail } = require("#common/Mailer.js");
+const Transaction = require("#models/Transaction.js");
+const Reservation = require("#models/Reservation.js");
+const { log } = require("#common/Logger.js");
 
 /**
- * Borrow a book from the library
+ * Borrow a book
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
 const borrowBook = async (req, res) => {
+  // Start MongoDB session for transaction
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
     const { bookId } = req.params;
     const userId = req.userId;
-    const { durationDays = 14 } = req.body; // Default borrowing period is 14 days
 
-    // Find book
-    const book = await Book.findById(bookId);
-    if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+    if (!bookId) {
+      return res.status(400).json({ message: "Book ID is required" });
     }
 
-    // Check if book is available to borrow
-    if (book.status !== "available") {
-      return res.status(400).json({ message: `Book is not available for borrowing (current status: ${book.status})` });
-    }
+    // Find user and book with session to prevent race conditions
+    const user = await User.findById(userId).session(session);
+    const book = await Book.findById(bookId).session(session);
 
-    // Check if there are copies available
-    if (book.copies < 1) {
-      return res.status(400).json({ message: "No copies of this book are available" });
-    }
-
-    // Find user
-    const user = await User.findById(userId);
+    // Check if resources exist
     if (!user) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if user is allowed to borrow (membership active)
-    if (user.library.membershipStatus !== "ACTIVE") {
-      return res.status(403).json({ message: "Your membership is not active" });
+    if (!book) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({ message: "Book not found" });
     }
 
-    // Check if user has outstanding fines
+    // Check for unpaid fines
     if (user.library.fines > 0) {
-      return res.status(403).json({ message: "You have unpaid fines" });
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(403).json({
+        message: "You have unpaid fines",
+        amount: user.library.fines,
+        redirectTo: "/pay-fines",
+      });
     }
 
-    // Calculate due date
-    const dueDate = new Date();
-    dueDate.setDate(dueDate.getDate() + durationDays);
-
-    // Create borrow record
-    user.library.borrowedBooks.push({
-      book: bookId,
-      borrowDate: new Date(),
-      dueDate: dueDate,
-      status: "BORROWED",
-    });
-
-    // Update book status
-    book.copies -= 1;
-    if (book.copies === 0) {
-      book.status = "borrowed";
+    // Check if user already has this book
+    const alreadyBorrowed = user.library.borrowed.some((item) => item.book.toString() === bookId);
+    if (alreadyBorrowed) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).json({ message: "You already have this book" });
     }
 
-    // Save changes
-    await user.save();
-    await book.save();
+    // Check borrowing limit based on membership type
+    const membershipType = user.library.membershipType || "standard";
+    const borrowLimit =
+      {
+        standard: 5,
+        premium: 10,
+        student: 7,
+        senior: 7,
+      }[membershipType] || 5;
 
-    // Send confirmation email if user has email notifications enabled
-    if (user.library.notificationPreferences.emailNotifications && user.auth.email) {
-      const emailContent = `
-        <h2>Book Borrowed Successfully</h2>
-        <p>Dear ${user.profile.firstName || user.identifier.username},</p>
-        <p>You have successfully borrowed <strong>${book.title}</strong> by ${book.author}.</p>
-        <p>Due date: ${dueDate.toDateString()}</p>
-        <p>Please return the book before the due date to avoid late fees.</p>
-        <p>Thank you for using our library!</p>
-      `;
-
-      await sendMail(user.auth.email, "Book Borrowed Confirmation", emailContent);
+    if (user.library.borrowed.length >= borrowLimit) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(403).json({
+        message: `Borrowing limit of ${borrowLimit} books reached for your ${membershipType} membership`,
+      });
     }
 
-    return res.status(200).json({
-      message: "Book borrowed successfully",
-      borrowRecord: user.library.borrowedBooks[user.library.borrowedBooks.length - 1],
-      dueDate,
-    });
-  } catch (err) {
-    log(err.message, "ERROR", "routes POST /books/:bookId/borrow");
-    return res.status(500).send();
+    // Check if book is available or reserved for this user
+    let canBorrow = false;
+    let reservation = null;
+
+    if (book.status === "available") {
+      canBorrow = true;
+    } else if (book.status === "reserved") {
+      // Check if this user has a ready reservation for this book
+      reservation = await Reservation.findOne({
+        user: userId,
+        book: bookId,
+        status: "ready",
+      }).session(session);
+
+      if (reservation) {
+        canBorrow = true;
+      }
+    }
+
+    if (canBorrow) {
+      try {
+        // Set borrow and due dates
+        const borrowDate = new Date();
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 14); // 14 days loan period
+
+        // Update book status
+        book.status = "borrowed";
+        book.borrowedBy = userId;
+        book.dueDate = dueDate;
+
+        // Add book to user's borrowed list
+        user.library.borrowed.push({
+          book: bookId,
+          borrowedAt: borrowDate,
+          dueDate: dueDate,
+        });
+
+        // If borrowed from reservation, update reservation status
+        if (reservation) {
+          reservation.status = "fulfilled";
+          await reservation.save({ session });
+        }
+
+        // Create transaction record
+        await Transaction.create(
+          [
+            {
+              user: userId,
+              book: bookId,
+              type: "borrow",
+              date: borrowDate,
+              dueDate,
+            },
+          ],
+          { session }
+        );
+
+        // Save all changes
+        await user.save({ session });
+        await book.save({ session });
+
+        // Commit the transaction
+        await session.commitTransaction();
+
+        log(`User ${userId} borrowed book ${bookId}`, "INFO", "TRANSACTION");
+        return res.status(200).json({
+          message: "Book borrowed successfully",
+          dueDate,
+        });
+      } catch (dbError) {
+        // Database error handling
+        await session.abortTransaction();
+        log(`Database error in borrowBook: ${dbError.message}`, "ERROR", "TRANSACTION");
+        return res.status(500).json({ message: "Failed to process borrowing transaction" });
+      }
+    } else {
+      await session.abortTransaction();
+
+      if (book.status === "borrowed") {
+        return res.status(400).json({ message: "Book is currently borrowed" });
+      } else if (book.status === "reserved") {
+        return res.status(400).json({ message: "Book is reserved by another user" });
+      } else {
+        return res.status(400).json({ message: "Book is not available for borrowing" });
+      }
+    }
+  } catch (error) {
+    // General error handling
+    if (session.inTransaction()) {
+      await session.abortTransaction();
+    }
+    log(`Error in borrowBook: ${error.message}`, "ERROR", "API");
+    return res.status(500).json({ message: "Server error" });
+  } finally {
+    // Always end the session
+    session.endSession();
   }
 };
 

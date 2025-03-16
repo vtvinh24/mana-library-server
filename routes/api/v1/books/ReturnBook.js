@@ -1,116 +1,105 @@
-const { log } = require("#common/Logger.js");
 const Book = require("#models/Book.js");
 const User = require("#models/User.js");
-const { sendMail } = require("#common/Mailer.js");
+const Reservation = require("#models/Reservation.js");
+const Transaction = require("#models/Transaction.js");
+const { startSession } = require("mongoose");
 
-/**
- * Return a borrowed book to the library
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- */
 const returnBook = async (req, res) => {
-  try {
-    const { bookId } = req.params;
-    const userId = req.userId;
+  const session = await startSession();
+  session.startTransaction();
 
-    // Find user
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+  try {
+    const { userId, bookId } = req.body;
+
+    if (!userId || !bookId) {
+      return res.status(400).json({ message: "User ID and Book ID are required" });
     }
 
-    // Find book
-    const book = await Book.findById(bookId);
+    // Find book and user with session to prevent race conditions
+    const book = await Book.findById(bookId).session(session);
+    const user = await User.findById(userId).session(session);
+
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    // Find the borrow record
-    const borrowIndex = user.library.borrowedBooks.findIndex((item) => item.book.toString() === bookId && item.status === "BORROWED");
-
-    if (borrowIndex === -1) {
-      return res.status(404).json({ message: "You don't have this book borrowed" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    const borrowRecord = user.library.borrowedBooks[borrowIndex];
-    const today = new Date();
+    // Check if user has borrowed this book
+    const borrowedBook = user.library.borrowed.find((item) => item.book.toString() === bookId);
 
-    // Calculate late fee if applicable (10 cents per day late)
+    if (!borrowedBook) {
+      return res.status(400).json({ message: "You haven't borrowed this book" });
+    }
+
+    // Calculate late fee if applicable
+    const borrowDate = new Date(borrowedBook.borrowDate);
+    const dueDate = new Date(borrowedBook.dueDate);
+    const returnDate = new Date();
     let lateFee = 0;
-    if (today > borrowRecord.dueDate) {
-      const daysLate = Math.ceil((today - borrowRecord.dueDate) / (1000 * 60 * 60 * 24));
-      lateFee = daysLate * 0.1; // $0.10 per day
-    }
 
-    // Update borrow record status
-    borrowRecord.status = "RETURNED";
-    borrowRecord.returnedDate = today;
-    user.library.borrowedBooks[borrowIndex] = borrowRecord;
-
-    // Add fine if late
-    if (lateFee > 0) {
+    if (returnDate > dueDate) {
+      const daysLate = Math.ceil((returnDate - dueDate) / (1000 * 60 * 60 * 24));
+      // Use configuration value instead of hardcoding the fee
+      const feePerDay = book.lateFeeDailyRate || 0.1; // Default to $0.10 if not configured
+      lateFee = daysLate * feePerDay;
       user.library.fines += lateFee;
     }
 
-    // Update book status and copies count
-    book.copies += 1;
-    if (book.status === "borrowed") {
+    // Update user's borrowed books
+    user.library.borrowed = user.library.borrowed.filter((item) => item.book.toString() !== bookId);
+
+    // Create transaction record
+    await Transaction.create({
+      user: userId,
+      book: bookId,
+      type: "return",
+      date: returnDate,
+      lateFee,
+    });
+
+    // Check for pending reservations
+    const pendingReservations = await Reservation.find({
+      book: bookId,
+      status: "pending",
+    })
+      .sort({ createdAt: 1 })
+      .session(session);
+
+    // Update book status based on reservations
+    if (pendingReservations.length > 0) {
+      // Book has pending reservations, mark it as reserved
+      book.status = "reserved";
+
+      // Update the first reservation to ready
+      const nextReservation = pendingReservations[0];
+      nextReservation.status = "ready";
+      nextReservation.notifiedAt = new Date();
+      await nextReservation.save({ session });
+
+      // TODO: Notify user that reservation is ready
+    } else {
+      // No pending reservations, mark as available
       book.status = "available";
     }
 
-    // Save changes
-    await user.save();
-    await book.save();
+    await user.save({ session });
+    await book.save({ session });
 
-    // Check for reservations
-    const usersWithReservation = await User.find({
-      "library.reservedBooks": {
-        $elemMatch: {
-          book: bookId,
-          status: "ACTIVE",
-        },
-      },
-    }).sort({ "library.reservedBooks.reservationDate": 1 });
-
-    // Notify first user in the reservation queue if any
-    if (usersWithReservation.length > 0) {
-      const nextUser = usersWithReservation[0];
-
-      if (nextUser.library.notificationPreferences.emailNotifications && nextUser.auth.email) {
-        const emailContent = `
-          <h2>Book Available for Pickup</h2>
-          <p>Dear ${nextUser.profile.firstName || nextUser.identifier.username},</p>
-          <p>Good news! The book <strong>${book.title}</strong> by ${book.author} that you reserved is now available.</p>
-          <p>Please visit the library within the next 3 days to check out this book.</p>
-          <p>Thank you for using our library!</p>
-        `;
-
-        await sendMail(nextUser.auth.email, "Reserved Book Available", emailContent);
-      }
-    }
-
-    // Send return confirmation email
-    if (user.library.notificationPreferences.emailNotifications && user.auth.email) {
-      const emailContent = `
-        <h2>Book Return Confirmation</h2>
-        <p>Dear ${user.profile.firstName || user.identifier.username},</p>
-        <p>You have successfully returned <strong>${book.title}</strong> by ${book.author}.</p>
-        ${lateFee > 0 ? `<p>Late fee: $${lateFee.toFixed(2)}</p>` : "<p>Thank you for returning on time!</p>"}
-        <p>Total outstanding fines: $${user.library.fines.toFixed(2)}</p>
-        <p>Thank you for using our library!</p>
-      `;
-
-      await sendMail(user.auth.email, "Book Return Confirmation", emailContent);
-    }
+    await session.commitTransaction();
+    session.endSession();
 
     return res.status(200).json({
       message: "Book returned successfully",
-      lateFee: lateFee > 0 ? lateFee : 0,
-      outstandingFines: user.library.fines,
+      lateFee: lateFee > 0 ? lateFee : undefined,
     });
-  } catch (err) {
-    log(err.message, "ERROR", "routes POST /books/:bookId/return");
-    return res.status(500).send();
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    console.error("Error returning book:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
