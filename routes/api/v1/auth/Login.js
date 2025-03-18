@@ -4,13 +4,15 @@ const { createToken } = require("#common/JWT.js");
 const Env = require("#config/Env.js");
 const AuditLogger = require("#services/AuditLogger.js");
 const { log } = require("#common/Logger.js");
+const { verifyTOTP } = require("#common/OTPAuth.js");
+const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
 
 /**
  * Handle user login
  */
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, code } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
@@ -43,7 +45,6 @@ const login = async (req, res) => {
     const salt = user.auth.salt;
 
     // Hash the provided password using the same salt
-    // Using default values for digest, iterations, and keylen
     const hashedPassword = await getHash(password, salt);
 
     // Compare the computed hash with the stored hash
@@ -55,7 +56,26 @@ const login = async (req, res) => {
       return;
     }
 
-    // Password is valid - handle successful login
+    // Check if 2FA is enabled and validate code if necessary
+    if (user.auth.twoFactor && user.auth.twoFactor.enabled) {
+      // If 2FA is enabled but no code provided
+      if (!code) {
+        return res.status(401).json({
+          message: "Two-factor authentication code required",
+        });
+      }
+
+      // Verify the 2FA code
+      const validCode = await verifyTOTP(user, code);
+      if (!validCode) {
+        AuditLogger.auth.loginFailure(email, clientIp, "invalid_2fa_code");
+        return res.status(CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.code).json({
+          message: "Invalid two-factor authentication code",
+        });
+      }
+    }
+
+    // Password is valid (and 2FA if required) - handle successful login
 
     // Generate tokens
     const token = createToken(user._id, Env.JWT_EXPIRES_IN);
@@ -79,9 +99,8 @@ const login = async (req, res) => {
         tag: user.identifier.tag,
         email: user.auth.email,
         role: user.auth.role,
-        fullName: user.fullName,
-        verified: user.verified,
-        enable2FA: user.enable2FA,
+        verified: user.auth.verified,
+        enable2FA: user.auth.twoFactor?.enabled || false,
       },
     });
   } catch (error) {

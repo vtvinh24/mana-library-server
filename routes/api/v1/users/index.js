@@ -12,13 +12,6 @@ const { createUser } = require("./CreateUser.js");
 const { updateUser } = require("./UpdateUser.js");
 const { deleteUser } = require("./DeleteUser.js");
 
-// User CRUD routes
-router.get("/", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getUsers);
-router.get("/:userId", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getUserById);
-router.post("/", requireAuth, requireRoles([ROLE.ADMIN]), createUser);
-router.patch("/:userId", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), updateUser);
-router.delete("/:userId", requireAuth, requireRoles([ROLE.ADMIN]), deleteUser);
-
 // Profile routes (for user to access their own data)
 router.get("/profile", requireAuth, getProfile);
 router.patch("/profile", requireAuth, updateProfile);
@@ -30,7 +23,14 @@ router.delete("/favorites/:bookId", requireAuth, removeFavorite);
 
 // User notifications routes
 router.get("/notifications", requireAuth, getNotifications);
-router.post("/notifications/:notificationId/read", requireAuth, markAsRead);
 router.post("/notifications/read-all", requireAuth, markAllAsRead);
+router.post("/notifications/:notificationId/read", requireAuth, markAsRead);
+
+// User CRUD routes
+router.get("/", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getUsers);
+router.get("/:userId", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), getUserById);
+router.post("/", requireAuth, requireRoles([ROLE.ADMIN]), createUser);
+router.patch("/:userId", requireAuth, requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), updateUser);
+router.delete("/:userId", requireAuth, requireRoles([ROLE.ADMIN]), deleteUser);
 
 module.exports = router;

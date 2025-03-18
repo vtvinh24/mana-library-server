@@ -46,9 +46,8 @@ const JwtMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized: user not found" });
     }
 
-    // Check if user account is active or has been disabled since token was issued
-    if (user.auth && user.auth.status !== "active") {
-      return res.status(403).json({ message: "Forbidden: account is inactive or suspended" });
+    if (user.auth.banned) {
+      return res.status(403).json({ message: "Forbidden: account is suspended" });
     }
 
     // Store token in request for potential later revocation
@@ -174,8 +173,8 @@ const refreshToken = async (req, res) => {
     }
 
     // Check if user account is active
-    if (user.auth && user.auth.status !== "active") {
-      return res.status(403).json({ message: "Account is inactive or suspended" });
+    if (user.auth.banned) {
+      return res.status(403).json({ message: "Account is suspended" });
     }
 
     // Generate new access token

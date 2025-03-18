@@ -4,9 +4,7 @@ async function getBookById(req, res) {
   try {
     const { bookId } = req.params;
 
-    const book = await Book.findByPk(bookId, {
-      include: [{ association: "author" }, { association: "category" }, { association: "publisher" }],
-    });
+    const book = await Book.findById(bookId);
 
     if (!book) {
       return res.status(404).json({ message: "Book not found" });

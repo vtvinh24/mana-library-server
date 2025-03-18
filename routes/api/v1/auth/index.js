@@ -26,6 +26,6 @@ router.get("/2fa", requireAuth, generate2FA);
 router.put("/2fa", requireAuth, toggle2FA);
 
 const { refresh } = require("./Refresh");
-router.post("/refresh", requireAuth, refresh);
+router.post("/refresh", refresh);
 
 module.exports = router;

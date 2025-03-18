@@ -12,8 +12,8 @@ const isDev = Env.NODE_ENV === "development";
 
 module.exports = function applyMiddlewares(app) {
   if (isDev) {
-    const interceptor = require("./Interceptor");
-    app.use(interceptor);
+    // const interceptor = require("./Interceptor");
+    // app.use(interceptor);
   }
 
   // Enhanced CORS configuration

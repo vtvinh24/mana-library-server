@@ -6,15 +6,11 @@ const Reservation = require("#models/Reservation.js");
 const { log } = require("#common/Logger.js");
 
 /**
- * Borrow a book
+ * Borrow a book using atomic operations
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
 const borrowBook = async (req, res) => {
-  // Start MongoDB session for transaction
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
     const { bookId } = req.params;
     const userId = req.userId;
@@ -23,27 +19,14 @@ const borrowBook = async (req, res) => {
       return res.status(400).json({ message: "Book ID is required" });
     }
 
-    // Find user and book with session to prevent race conditions
-    const user = await User.findById(userId).session(session);
-    const book = await Book.findById(bookId).session(session);
-
-    // Check if resources exist
+    // First check if user exists and can borrow books
+    const user = await User.findById(userId);
     if (!user) {
-      await session.abortTransaction();
-      session.endSession();
       return res.status(404).json({ message: "User not found" });
-    }
-
-    if (!book) {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(404).json({ message: "Book not found" });
     }
 
     // Check for unpaid fines
     if (user.library.fines > 0) {
-      await session.abortTransaction();
-      session.endSession();
       return res.status(403).json({
         message: "You have unpaid fines",
         amount: user.library.fines,
@@ -52,10 +35,8 @@ const borrowBook = async (req, res) => {
     }
 
     // Check if user already has this book
-    const alreadyBorrowed = user.library.borrowed.some((item) => item.book.toString() === bookId);
+    const alreadyBorrowed = user.library.borrowedBooks.some((item) => item.book.toString() === bookId);
     if (alreadyBorrowed) {
-      await session.abortTransaction();
-      session.endSession();
       return res.status(400).json({ message: "You already have this book" });
     }
 
@@ -69,15 +50,18 @@ const borrowBook = async (req, res) => {
         senior: 7,
       }[membershipType] || 5;
 
-    if (user.library.borrowed.length >= borrowLimit) {
-      await session.abortTransaction();
-      session.endSession();
+    if (user.library.borrowedBooks.length >= borrowLimit) {
       return res.status(403).json({
         message: `Borrowing limit of ${borrowLimit} books reached for your ${membershipType} membership`,
       });
     }
 
     // Check if book is available or reserved for this user
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
     let canBorrow = false;
     let reservation = null;
 
@@ -89,73 +73,14 @@ const borrowBook = async (req, res) => {
         user: userId,
         book: bookId,
         status: "ready",
-      }).session(session);
+      });
 
       if (reservation) {
         canBorrow = true;
       }
     }
 
-    if (canBorrow) {
-      try {
-        // Set borrow and due dates
-        const borrowDate = new Date();
-        const dueDate = new Date();
-        dueDate.setDate(dueDate.getDate() + 14); // 14 days loan period
-
-        // Update book status
-        book.status = "borrowed";
-        book.borrowedBy = userId;
-        book.dueDate = dueDate;
-
-        // Add book to user's borrowed list
-        user.library.borrowed.push({
-          book: bookId,
-          borrowedAt: borrowDate,
-          dueDate: dueDate,
-        });
-
-        // If borrowed from reservation, update reservation status
-        if (reservation) {
-          reservation.status = "fulfilled";
-          await reservation.save({ session });
-        }
-
-        // Create transaction record
-        await Transaction.create(
-          [
-            {
-              user: userId,
-              book: bookId,
-              type: "borrow",
-              date: borrowDate,
-              dueDate,
-            },
-          ],
-          { session }
-        );
-
-        // Save all changes
-        await user.save({ session });
-        await book.save({ session });
-
-        // Commit the transaction
-        await session.commitTransaction();
-
-        log(`User ${userId} borrowed book ${bookId}`, "INFO", "TRANSACTION");
-        return res.status(200).json({
-          message: "Book borrowed successfully",
-          dueDate,
-        });
-      } catch (dbError) {
-        // Database error handling
-        await session.abortTransaction();
-        log(`Database error in borrowBook: ${dbError.message}`, "ERROR", "TRANSACTION");
-        return res.status(500).json({ message: "Failed to process borrowing transaction" });
-      }
-    } else {
-      await session.abortTransaction();
-
+    if (!canBorrow) {
       if (book.status === "borrowed") {
         return res.status(400).json({ message: "Book is currently borrowed" });
       } else if (book.status === "reserved") {
@@ -164,16 +89,71 @@ const borrowBook = async (req, res) => {
         return res.status(400).json({ message: "Book is not available for borrowing" });
       }
     }
-  } catch (error) {
-    // General error handling
-    if (session.inTransaction()) {
-      await session.abortTransaction();
+
+    // All checks passed, proceed with borrowing the book
+    const borrowDate = new Date();
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 14); // 14 days loan period
+
+    // Update book status with atomic operation
+    const updatedBook = await Book.findOneAndUpdate(
+      { _id: bookId, $or: [{ status: "available" }, { status: "reserved" }] },
+      {
+        status: "borrowed",
+        borrowedBy: userId,
+        dueDate: dueDate,
+      },
+      { new: true }
+    );
+
+    if (!updatedBook) {
+      return res.status(400).json({ message: "Book is no longer available" });
     }
+
+    // Update user's borrowed list with atomic operation
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $push: {
+          "library.borrowedBooks": {
+            book: bookId,
+            borrowedAt: borrowDate,
+            dueDate: dueDate,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      // Revert book status if user update fails
+      await Book.findOneAndUpdate({ _id: bookId }, { status: "available", borrowedBy: null, dueDate: null });
+      return res.status(500).json({ message: "Failed to update user record" });
+    }
+
+    // If borrowed from reservation, update reservation status
+    if (reservation) {
+      await Reservation.findOneAndUpdate({ _id: reservation._id, status: "ready" }, { status: "fulfilled" });
+    }
+
+    // Create transaction record
+    await Transaction.create({
+      user: userId,
+      book: bookId,
+      type: "borrow",
+      date: borrowDate,
+      dueDate,
+    });
+
+    log(`User ${userId} borrowed book ${bookId}`, "INFO", "TRANSACTION");
+    return res.status(200).json({
+      message: "Book borrowed successfully",
+      dueDate,
+    });
+  } catch (error) {
     log(`Error in borrowBook: ${error.message}`, "ERROR", "API");
+    console.error("Error stack:", error.stack);
     return res.status(500).json({ message: "Server error" });
-  } finally {
-    // Always end the session
-    session.endSession();
   }
 };
 

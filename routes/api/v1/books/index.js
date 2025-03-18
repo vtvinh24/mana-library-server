@@ -16,6 +16,10 @@ router.post("/", requireRoles([ROLE.ADMIN, ROLE.LIBRARIAN]), createBook);
 const { searchBooks } = require("./SearchBooks");
 router.get("/search", searchBooks);
 
+// History - must be before /:bookId route
+const { getHistory } = require("./GetHistory");
+router.get("/history", requireAuth, getHistory);
+
 // BORROWED and RESERVED routes - must be before /:bookId route
 // Get Borrowed Books
 const { getBorrowedBooks } = require("./GetBorrowedBooks");

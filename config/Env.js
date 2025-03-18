@@ -43,7 +43,33 @@ const Env = {
       : "dev_only_secret_do_not_use_in_production"),
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || "1h",
   JWT_ISSUER: process.env.JWT_ISSUER || "issuer",
+  JWT_REFRESH_SECRET:
+    process.env.JWT_REFRESH_SECRET ||
+    (process.env.NODE_ENV === "production"
+      ? (() => {
+          throw new Error("JWT_SECRET must be set in production");
+        })()
+      : "dev_only_secret_do_not_use_in_production"),
   JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN || "7d",
+
+  // SMTP
+  SMTP_HOST: process.env.SMTP_HOST || "smtp.gmail.com",
+  SMTP_PORT: process.env.SMTP_PORT || 465,
+  SMTP_SERVICE: process.env.SMTP_SERVICE || "gmail",
+  SMTP_SECURE: process.env.SMTP_SECURE || "true",
+  SMTP_USER: process.env.SMTP_USER || "",
+  SMTP_PASS: process.env.SMTP_PASS || "",
+
+  // OTP
+  OTP_LENGTH: process.env.OTP_LENGTH || 6,
+  OTP_EXPIRES_IN: process.env.OTP_EXPIRES_IN || 300,
+
+  // TOTP
+  TOTP_ALGORITHM: process.env.TOTP_ALGORITHM || "SHA1",
+  TOTP_ISSUER: process.env.TOTP_ISSUER || "ManaLibrary",
+  TOTP_LABEL: process.env.TOTP_LABEL || "ManaLibrary",
+  TOTP_DIGITS: process.env.TOTP_DIGITS || 6,
+  TOTP_PERIOD: process.env.TOTP_PERIOD || 30,
 };
 
 module.exports = Env;

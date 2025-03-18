@@ -4,6 +4,7 @@ const { generateBase32 } = require("./Hasher");
 const QRCode = require("qrcode");
 const { OtpSecretError } = require("#enum/Error.js");
 const Env = require("#config/Env.js");
+const { log } = require("./Logger");
 
 /**
  * Generates a TOTP secret and URL for the specified user.
@@ -30,7 +31,7 @@ async function generateTOTP(user) {
     secret,
   });
 
-  user.auth.otpSecret = secret;
+  user.auth.twoFactor.secret = secret;
   await user.save();
   return new Promise((resolve, reject) => {
     QRCode.toBuffer(totp.toString(), (err, buffer) => {
@@ -55,7 +56,7 @@ async function verifyTOTP(user, token, window = 1) {
   if (!(user instanceof User)) {
     throw new Error("Invalid user object");
   }
-  if (!user.auth || !user.auth.otpSecret) {
+  if (!user.auth.twoFactor.secret) {
     throw OtpSecretError;
   }
 
@@ -63,10 +64,10 @@ async function verifyTOTP(user, token, window = 1) {
   const totp = new OTPAuth.TOTP({
     algorithm: Env.TOTP_ALGORITHM || "SHA1",
     issuer: Env.TOTP_ISSUER,
-    label: Env.TOTP_LABEL,
+    label: user.identifier.username || Env.TOTP_LABEL,
     digits: Env.TOTP_DIGITS || 6,
     period: Env.TOTP_PERIOD || 30,
-    secret: user.auth.otpSecret,
+    secret: user.auth.twoFactor.secret,
   });
 
   // Verify the token
