@@ -12,12 +12,48 @@ function filteredUser(user) {
     throw new Error("Invalid user object");
   }
 
-  /* eslint-disable-next-line no-unused-vars */
-  const { auth, ...userWithoutAuth } = user.toObject();
+  const userObj = user.toObject();
 
-  /* eslint-disable-next-line no-unused-vars */
-  const filtered = Object.fromEntries(Object.entries(userWithoutAuth).filter(([_, v]) => v != null));
-  return filtered;
+  // Create a new object with only the fields we want to expose
+  return {
+    _id: userObj._id,
+    identifier: userObj.identifier,
+    auth: {
+      email: userObj.auth.email,
+      verified: userObj.auth.verified,
+      role: userObj.auth.role,
+      // Explicitly exclude sensitive fields like hash, salt, etc.
+    },
+    profile: {
+      firstName: userObj.profile?.firstName,
+      lastName: userObj.profile?.lastName,
+      preferredLanguage: userObj.profile?.preferredLanguage,
+      phone: userObj.profile?.phone,
+      dob: userObj.profile?.dob,
+      avatar: userObj.profile?.avatar,
+      address: userObj.profile?.address,
+    },
+    library: {
+      cardNumber: userObj.library?.cardNumber,
+      membershipStatus: userObj.library?.membershipStatus,
+      membershipType: userObj.library?.membershipType,
+      expirationDate: userObj.library?.expirationDate,
+      accountBalance: userObj.library?.accountBalance,
+      // Exclude borrowedBooks details for basic profile view
+      // Just return counts if needed
+      borrowedBooksCount: userObj.library?.borrowedBooks?.length || 0,
+      reservedBooksCount: userObj.library?.reservedBooks?.length || 0,
+    },
+    // Include these fields from the base schema
+    createdAt: userObj.createdAt,
+    updatedAt: userObj.updatedAt,
+
+    // Add recent activity if needed - this depends on how you're storing activity
+    recentActivity: userObj.recentActivity || [],
+
+    // Include virtuals that might be useful
+    fullName: userObj.fullName,
+  };
 }
 
 /**

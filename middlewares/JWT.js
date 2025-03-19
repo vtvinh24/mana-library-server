@@ -29,7 +29,8 @@ const JwtMiddleware = async (req, res, next) => {
 
     // Add safety check for token payload
     if (!decoded || !decoded.payload) {
-      return res.status(401).json({ message: "Unauthorized: invalid token structure" });
+      req.authenticated = false;
+      return next();
     }
 
     // Check token issue time to prevent replay attacks with very old tokens
@@ -43,7 +44,8 @@ const JwtMiddleware = async (req, res, next) => {
     const user = await User.findById(decoded.payload).lean();
 
     if (!user) {
-      return res.status(401).json({ message: "Unauthorized: user not found" });
+      req.authenticated = false;
+      return next();
     }
 
     if (user.auth.banned) {
@@ -66,7 +68,8 @@ const JwtMiddleware = async (req, res, next) => {
     }
 
     log("JWT verification error: " + error.message, "WARN", "SECURITY");
-    return res.status(401).json({ message: "Unauthorized: invalid token" });
+    req.authenticated = false;
+    next();
   }
 };
 

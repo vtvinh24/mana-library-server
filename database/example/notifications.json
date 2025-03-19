@@ -1,5 +1,42 @@
-{
-  "userId": "60d21b4667d0d8992e610c88",
-  "message": "Your reserved book 'Atomic Habits' is now available for pickup. Please collect it within 3 days.",
-  "status": "SENT"
-}
+[
+  {
+    "_id": "62d21b4667d0d8992e610e01",
+    "userId": "60d21b4667d0d8992e610c85",
+    "message": "Your book 'Clean Code' is due in 2 days. Please return it on time to avoid late fees.",
+    "type": "due-date",
+    "read": false,
+    "createdAt": "2023-08-07T08:00:00.000Z"
+  },
+  {
+    "_id": "62d21b4667d0d8992e610e02",
+    "userId": "60d21b4667d0d8992e610c85",
+    "message": "Your reserved book 'Design Patterns' is now available for pickup. You have 48 hours to check it out.",
+    "type": "reservation",
+    "read": true,
+    "createdAt": "2023-08-05T14:30:00.000Z"
+  },
+  {
+    "_id": "62d21b4667d0d8992e610e03",
+    "userId": "60d21b4667d0d8992e610c86",
+    "message": "Your book 'The Pragmatic Programmer' is now overdue. Please return it as soon as possible to minimize fees.",
+    "type": "overdue",
+    "read": false,
+    "createdAt": "2023-08-08T09:15:00.000Z"
+  },
+  {
+    "_id": "62d21b4667d0d8992e610e04",
+    "userId": "60d21b4667d0d8992e610c86",
+    "message": "Based on your reading preferences, we recommend 'The Phoenix Project'. Check it out at the Fiction section.",
+    "type": "recommendation",
+    "read": false,
+    "createdAt": "2023-08-06T10:00:00.000Z"
+  },
+  {
+    "_id": "62d21b4667d0d8992e610e05",
+    "userId": "60d21b4667d0d8992e610c86",
+    "message": "Your payment of $2.50 for overdue fees has been processed. Thank you!",
+    "type": "payment",
+    "read": true,
+    "createdAt": "2023-08-01T13:20:00.000Z"
+  }
+]

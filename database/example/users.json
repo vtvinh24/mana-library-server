@@ -1,20 +1,135 @@
-{
-  "title": "The Design of Everyday Things",
-  "author": "Don Norman",
-  "ISBN": "978-0-465-05065-9",
-  "publisher": "Basic Books",
-  "publicationYear": 2013,
-  "genre": ["Design", "Psychology", "Non-fiction"],
-  "description": "A powerful primer on how and why some products satisfy customers while others frustrate them.",
-  "pages": 368,
-  "language": "English",
-  "coverImage": "/images/covers/design-everyday-things.jpg",
-  "location": "Design Section, Shelf D4",
-  "status": "available",
-  "condition": "good",
-  "copies": 2,
-  "acquisitionDate": "2023-04-15T00:00:00.000Z",
-  "price": 18.99,
-  "deweyDecimal": "745.4",
-  "tags": ["usability", "cognitive psychology", "user experience", "human-centered design"]
-}
+[
+  {
+    "_id": "60d21b4667d0d8992e610c85",
+    "identifier": {
+      "username": "johndoe",
+      "tag": "1234"
+    },
+    "auth": {
+      "email": "john.doe@example.com",
+      "role": "USER",
+      "verified": true,
+      "lastLogin": "2023-08-10T13:45:22.000Z"
+    },
+    "profile": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "dob": "1985-05-15T00:00:00.000Z",
+      "avatar": "/images/avatars/default.png",
+      "address": {
+        "street": "123 Main St",
+        "city": "Springfield",
+        "state": "IL",
+        "zipCode": "62704",
+        "country": "USA"
+      },
+      "preferredLanguage": "English"
+    },
+    "library": {
+      "cardNumber": "LIB-10045789",
+      "membershipStatus": "ACTIVE",
+      "membershipType": "STANDARD",
+      "expirationDate": "2024-08-15T00:00:00.000Z",
+      "accountBalance": 0,
+      "fines": 0,
+      "readingPreferences": {
+        "favoriteGenres": ["Science Fiction", "Mystery", "Biography"],
+        "preferredAuthors": ["Neal Stephenson", "Agatha Christie"]
+      },
+      "notificationPreferences": {
+        "emailNotifications": true,
+        "smsNotifications": false,
+        "notifyBeforeDueDate": true,
+        "notifyOnOverdue": true,
+        "notifyOnHoldAvailable": true
+      }
+    },
+    "createdAt": "2022-08-15T10:30:00.000Z",
+    "updatedAt": "2023-08-10T13:45:22.000Z"
+  },
+  {
+    "_id": "60d21b4667d0d8992e610c86",
+    "identifier": {
+      "username": "janesmith",
+      "tag": "5678"
+    },
+    "auth": {
+      "email": "jane.smith@example.com",
+      "role": "USER",
+      "verified": true,
+      "lastLogin": "2023-08-09T16:22:45.000Z"
+    },
+    "profile": {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "dob": "1990-10-12T00:00:00.000Z",
+      "avatar": "/images/avatars/jane.png",
+      "address": {
+        "street": "456 Oak Avenue",
+        "city": "Portland",
+        "state": "OR",
+        "zipCode": "97201",
+        "country": "USA"
+      },
+      "preferredLanguage": "English"
+    },
+    "library": {
+      "cardNumber": "LIB-10045790",
+      "membershipStatus": "ACTIVE",
+      "membershipType": "PREMIUM",
+      "expirationDate": "2024-10-12T00:00:00.000Z",
+      "accountBalance": 0,
+      "fines": 2.5,
+      "readingPreferences": {
+        "favoriteGenres": ["Fantasy", "Historical Fiction"],
+        "preferredAuthors": ["J.K. Rowling", "George R.R. Martin"]
+      },
+      "notificationPreferences": {
+        "emailNotifications": true,
+        "smsNotifications": true,
+        "notifyBeforeDueDate": true,
+        "notifyOnOverdue": true,
+        "notifyOnHoldAvailable": true
+      }
+    },
+    "createdAt": "2022-10-12T09:15:00.000Z",
+    "updatedAt": "2023-08-09T16:22:45.000Z"
+  },
+  {
+    "_id": "60d21b4667d0d8992e610c87",
+    "identifier": {
+      "username": "mikebrown",
+      "tag": "9012"
+    },
+    "auth": {
+      "email": "mike.brown@example.com",
+      "role": "LIBRARIAN",
+      "verified": true,
+      "lastLogin": "2023-08-11T08:30:15.000Z"
+    },
+    "profile": {
+      "firstName": "Mike",
+      "lastName": "Brown",
+      "dob": "1978-03-22T00:00:00.000Z",
+      "avatar": "/images/avatars/mike.png",
+      "address": {
+        "street": "789 Pine Street",
+        "city": "Boston",
+        "state": "MA",
+        "zipCode": "02108",
+        "country": "USA"
+      },
+      "preferredLanguage": "English"
+    },
+    "library": {
+      "cardNumber": "LIB-STAFF001",
+      "membershipStatus": "ACTIVE",
+      "membershipType": "STAFF",
+      "expirationDate": "2099-12-31T00:00:00.000Z",
+      "accountBalance": 0,
+      "fines": 0
+    },
+    "createdAt": "2022-01-15T11:45:00.000Z",
+    "updatedAt": "2023-08-11T08:30:15.000Z"
+  }
+]

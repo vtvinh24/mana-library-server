@@ -1,13 +1,50 @@
-{
-  "userId": "60d21b4667d0d8992e610c88",
-  "amount": 5.5,
-  "date": "2023-08-10T15:20:00.000Z",
-  "type": "fine_payment",
-  "description": "Payment for overdue book: 'The Great Gatsby'",
-  "relatedRecord": {
-    "type": "book",
-    "id": "60d21b4667d0d8992e610c89"
+[
+  {
+    "_id": "61d21b4667d0d8992e610d01",
+    "user": "60d21b4667d0d8992e610c85",
+    "book": "60d21b4667d0d8992e610c8a",
+    "type": "borrow",
+    "date": "2023-08-05T10:15:00.000Z",
+    "dueDate": "2023-08-19T10:15:00.000Z"
   },
-  "paymentMethod": "credit_card",
-  "externalTransactionId": "pmt_28b4s29dkl29s"
-}
+  {
+    "_id": "61d21b4667d0d8992e610d02",
+    "user": "60d21b4667d0d8992e610c85",
+    "book": "60d21b4667d0d8992e610c8b",
+    "type": "return",
+    "date": "2023-08-03T16:45:00.000Z",
+    "lateFee": 0
+  },
+  {
+    "_id": "61d21b4667d0d8992e610d03",
+    "user": "60d21b4667d0d8992e610c86",
+    "book": "60d21b4667d0d8992e610c8c",
+    "type": "borrow",
+    "date": "2023-07-28T11:30:00.000Z",
+    "dueDate": "2023-08-11T11:30:00.000Z"
+  },
+  {
+    "_id": "61d21b4667d0d8992e610d04",
+    "user": "60d21b4667d0d8992e610c86",
+    "book": "60d21b4667d0d8992e610c8d",
+    "type": "reserve",
+    "date": "2023-08-07T09:20:00.000Z"
+  },
+  {
+    "_id": "61d21b4667d0d8992e610d05",
+    "user": "60d21b4667d0d8992e610c86",
+    "book": "60d21b4667d0d8992e610c8e",
+    "type": "return",
+    "date": "2023-07-15T14:20:00.000Z",
+    "lateFee": 2.5
+  },
+  {
+    "_id": "61d21b4667d0d8992e610d06",
+    "user": "60d21b4667d0d8992e610c86",
+    "type": "fine_payment",
+    "date": "2023-08-01T13:15:00.000Z",
+    "amount": 2.5,
+    "paymentMethod": "credit_card",
+    "externalTransactionId": "pay_1234567890"
+  }
+]
