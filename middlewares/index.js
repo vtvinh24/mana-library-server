@@ -11,11 +11,6 @@ const Env = require("#config/Env.js");
 const isDev = Env.NODE_ENV === "development";
 
 module.exports = function applyMiddlewares(app) {
-  if (isDev) {
-    // const interceptor = require("./Interceptor");
-    // app.use(interceptor);
-  }
-
   // Enhanced CORS configuration
   app.use(
     cors({
@@ -127,6 +122,11 @@ module.exports = function applyMiddlewares(app) {
     res.setHeader("X-XSS-Protection", "1; mode=block");
     next();
   });
+
+  if (isDev) {
+    const interceptor = require("./Interceptor");
+    app.use(interceptor);
+  }
 
   initializeCronJobs();
 };

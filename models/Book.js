@@ -1,42 +1,39 @@
 const mongoose = require("mongoose");
 const baseSchema = require("./Base");
 
-const bookCopySchema = new mongoose.Schema({
-  // Unique identifier for this specific copy
-  copyId: {
-    type: String,
-    required: true,
-  },
+const copySchema = new mongoose.Schema(
+  {
+    // The physical condition of the book copy
+    // Example: "good", "fair", "poor"
+    condition: {
+      type: String,
+      enum: ["new", "good", "fair", "poor"],
+      default: "good",
+    },
 
-  // Physical condition of this specific copy
-  // Example: "new", "good", "fair", "poor"
-  condition: {
-    type: String,
-    enum: ["new", "good", "fair", "poor"],
-    default: "good",
-  },
+    // The current availability status of the book copy
+    // Example: "available", "borrowed", "reserved", "lost"
+    status: {
+      type: String,
+      enum: ["available", "borrowed", "reserved", "lost"],
+      default: "available",
+    },
 
-  // Current availability status of this specific copy
-  // Example: "available", "borrowed", "reserved", "lost"
-  status: {
-    type: String,
-    enum: ["available", "borrowed", "reserved", "lost"],
-    default: "available",
-  },
+    // The date when the book copy was borrowed or reserved
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
 
-  // Physical location of this specific copy in the library
-  // Example: "Floor 2, Shelf B3"
-  location: {
-    type: String,
-    trim: true,
+    note: {
+      type: String,
+      trim: true,
+    },
   },
-
-  // Additional notes specific to this copy (optional)
-  notes: {
-    type: String,
-    trim: true,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 const bookSchema = new mongoose.Schema(
   {
@@ -108,49 +105,14 @@ const bookSchema = new mongoose.Schema(
     // URL or path to the book's cover image
     // Example: "/images/covers/fellowship-ring.jpg"
     coverImage: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Media",
-      default: null,
-    },
-
-    // More images, videos, ...
-    additionalMedia: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Media",
-      },
-    ],
-
-    // Array of individual book copies with their conditions and status
-    copies: {
-      type: [bookCopySchema],
-      default: [],
-    },
-
-    // Total number of copies (derived from copies array length)
-    totalCopies: {
-      type: Number,
-      default: 0,
-    },
-
-    // Date when the book was added to the library collection
-    // Example: 2022-05-15T00:00:00.000Z
-    acquisitionDate: {
-      type: Date,
-      default: Date.now,
-    },
-
-    // Purchase price or value of the book
-    // Example: 24.99
-    price: {
-      type: Number,
-      min: 0,
-    },
-
-    // Dewey Decimal Classification number for library organization
-    // Example: "813.54"
-    deweyDecimal: {
       type: String,
+    },
+
+    // Number of copies of this book owned by the library
+    // Example: 3
+    copies: {
+      type: [copySchema],
+      default: [],
     },
 
     // Additional keywords to help with searching and categorization
@@ -159,13 +121,28 @@ const bookSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+
+    // If true, not available for borrowing
+    restricted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: false,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 );
 
 bookSchema.add(baseSchema);
+
+bookSchema.virtual("isAvailable").get(function () {
+  if (this.restricted) {
+    return false;
+  }
+  return this.copies.some((copy) => copy.status === "available");
+});
 
 const Book = mongoose.model("Book", bookSchema);
 module.exports = Book;

@@ -11,8 +11,11 @@ log("Interceptor initialized", "DEBUG", "Interceptor");
 const interceptor = async (req, res, next) => {
   // const reqString = ("NEW REQUEST\n",
   //   req.method, " ", req.url, "\n",
-
   log(`New request from ${req.ip}`, "WARN", "Interceptor");
+  // userId
+  if (req.userId) {
+    log(`User ID: ${req.userId}`, "INFO", "Interceptor");
+  }
   log(`${req.method} ${req.url}`, "INFO", "Interceptor");
   // "Headers: ", req.headers, "\n",
   log(`Headers: ${JSON.stringify(req.headers)}`, "INFO", "Interceptor");
