@@ -20,6 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "apicache": "^1.6.3",
+    "axios": "^1.8.4",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -38,6 +39,7 @@
     "nodemailer": "^6.10.0",
     "otpauth": "^9.3.6",
     "qrcode": "^1.5.4",
+    "sharp": "^0.33.5",
     "socket.io": "^4.8.1"
   },
   "imports": {

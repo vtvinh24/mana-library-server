@@ -1,0 +1,19 @@
+meta {
+  name: Get books reserved by user
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8000/api/v1/books/reserved/:userId
+  body: none
+  auth: bearer
+}
+
+params:path {
+  userId: 
+}
+
+auth:bearer {
+  token: {{staffToken}}
+}

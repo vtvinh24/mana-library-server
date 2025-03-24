@@ -1,0 +1,23 @@
+meta {
+  name: Send code
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8000/api/v1/auth/send-code
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{email}}"
+  }
+  
+  /* OR
+  {
+    "phone": "+12345678901"
+  }
+  */
+}

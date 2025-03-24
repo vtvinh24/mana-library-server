@@ -1,0 +1,43 @@
+meta {
+  name: Create a new user
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/v1/users
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{staffToken}}
+}
+
+body:json {
+  {
+    "email": "newuser@example.com",
+    "password": "SecurePassword123!",
+    "role": "USER",
+    "profile": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "dob": "1990-01-01",
+      "avatar": "https://example.com/avatar.jpg",
+      "preferredLanguage": "English",
+      "address": {
+        "street": "123 Main St",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "USA"
+      }
+    },
+    "library": {
+      "cardNumber": "LIB123456",
+      "membershipStatus": "active",
+      "membershipType": "standard",
+      "expirationDate": "2024-12-31"
+    }
+  }
+}

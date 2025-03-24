@@ -31,6 +31,7 @@ async function exportBooks(req, res) {
       pages: book.pages,
       language: book.language,
       coverImage: book.coverImage,
+      additionalMedia: book.additionalMedia,
       location: book.location,
       deweyDecimal: book.deweyDecimal,
       tags: book.tags,

@@ -206,6 +206,44 @@ const userSchema = new mongoose.Schema({
       },
     },
   },
+  // Add favorites array to store references to favorite books
+  favorites: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Book",
+    default: [],
+  },
+  notifications: {
+    type: [
+      {
+        type: {
+          type: String,
+          enum: ["SYSTEM", "DUE_DATE", "RESERVATION", "OVERDUE", "FINE"],
+          required: true,
+        },
+        message: {
+          type: String,
+          required: true,
+        },
+        read: {
+          type: Boolean,
+          default: false,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+        relatedItem: {
+          type: mongoose.Schema.Types.ObjectId,
+          refPath: "notifications.relatedModel",
+        },
+        relatedModel: {
+          type: String,
+          enum: ["Book", "Transaction", "Reservation"],
+        },
+      },
+    ],
+    default: [],
+  },
 });
 
 // lowercase email before saving

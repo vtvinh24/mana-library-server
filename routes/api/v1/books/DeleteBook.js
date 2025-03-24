@@ -31,6 +31,20 @@ const deleteBook = async (req, res) => {
       }
     }
 
+    if (book.coverImage) {
+      // Check if any other books use this image
+      const otherBooks = await Book.countDocuments({
+        _id: { $ne: book._id },
+        coverImage: book.coverImage,
+      });
+
+      // If no other books use this image, delete it
+      if (otherBooks === 0) {
+        const media = await Media.findById(book.coverImage);
+        if (media) await media.deleteOne();
+      }
+    }
+
     // Perform a "soft delete" by setting deletedAt and deletedBy fields
     book.deletedAt = new Date();
     book.deletedBy = req.userId;

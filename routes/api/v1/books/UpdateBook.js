@@ -41,7 +41,21 @@ const updateBook = async (req, res) => {
     if (description) book.description = description;
     if (pages) book.pages = pages;
     if (language) book.language = language;
-    if (coverImage) book.coverImage = coverImage;
+    if (coverImage) {
+      if (mongoose.Types.ObjectId.isValid(coverImage)) {
+        // It's a Media ID
+        book.coverImage = coverImage;
+      } else if (typeof coverImage === "string" && coverImage.startsWith("http")) {
+        // It's a URL, create new Media
+        try {
+          const media = await createMediaFromUrl(coverImage, `${book.title} - Cover Image`, req.userId, book.tags);
+          book.coverImage = media._id;
+        } catch (mediaError) {
+          log(`Error creating cover image: ${mediaError.message}`, "ERROR", "UPDATE");
+          // Continue with update even if cover image fails
+        }
+      }
+    }
     if (location) book.location = location;
     if (condition) book.condition = condition;
     if (status) book.status = status;

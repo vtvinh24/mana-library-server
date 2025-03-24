@@ -16,4 +16,7 @@ router.use("/users", require("./users"));
 // Admin dashboard and metrics
 router.use("/admin", require("./admin"));
 
+// Media routes
+router.use("/media", require("./media"));
+
 module.exports = router;

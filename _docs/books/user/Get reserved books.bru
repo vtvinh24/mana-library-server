@@ -1,0 +1,15 @@
+meta {
+  name: Get reserved books
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8000/api/v1/books/reserved
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}

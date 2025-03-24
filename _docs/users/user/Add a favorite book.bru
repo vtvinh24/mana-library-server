@@ -1,0 +1,19 @@
+meta {
+  name: Add a favorite book
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8000/api/v1/users/favorites/:bookId
+  body: none
+  auth: bearer
+}
+
+params:path {
+  bookId: 67da1f78e645060b9dbb9cb3
+}
+
+auth:bearer {
+  token: {{token}}
+}

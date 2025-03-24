@@ -1,0 +1,26 @@
+meta {
+  name: Reserve a book
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/v1/books/:bookId/reserve
+  body: json
+  auth: bearer
+}
+
+params:path {
+  bookId: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "userId": "userId",
+    "bookId": "bookId"
+  }
+}

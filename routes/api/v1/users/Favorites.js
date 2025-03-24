@@ -11,7 +11,7 @@ const getFavorites = async (req, res) => {
 
     const user = await User.findById(userId).populate({
       path: "favorites",
-      select: "title author coverImage isbn status",
+      select: "title author coverImage isbn status", // Using lowercase isbn to match Book model
     });
 
     if (!user) {
@@ -45,13 +45,8 @@ const addFavorite = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Initialize favorites array if it doesn't exist
-    if (!user.favorites) {
-      user.favorites = [];
-    }
-
-    // Check if already in favorites
-    if (user.favorites.includes(bookId)) {
+    // Check if already in favorites - properly compare ObjectIds
+    if (user.favorites && user.favorites.some((id) => id.toString() === bookId)) {
       return res.status(400).json({ message: "Book already in favorites" });
     }
 
@@ -80,8 +75,8 @@ const removeFavorite = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if book is in favorites
-    if (!user.favorites || !user.favorites.includes(bookId)) {
+    // Check if book is in favorites - properly compare ObjectIds
+    if (!user.favorites || !user.favorites.some((id) => id.toString() === bookId)) {
       return res.status(400).json({ message: "Book not in favorites" });
     }
 

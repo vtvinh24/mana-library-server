@@ -1,0 +1,36 @@
+meta {
+  name: Create a book
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8000/api/v1/books
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{staffToken}}
+}
+
+body:json {
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "ISBN": "9780743273565",
+    "publisher": "Scribner",
+    "publicationYear": 1925,
+    "genre": ["Classic", "Fiction"],
+    "description": "A story of wealth, love and the American Dream",
+    "pages": 180,
+    "language": "English",
+    "coverImage": "https://example.com/gatsby.jpg",
+    "location": "Fiction Section, Shelf 3",
+    "condition": "good",
+    "copies": 5,
+    "price": 12.99,
+    "deweyDecimal": "813.52",
+    "tags": ["American Literature", "20th Century"]
+  }
+}

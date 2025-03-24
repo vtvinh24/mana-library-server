@@ -1,0 +1,15 @@
+meta {
+  name: Get notifications
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8000/api/v1/users/notifications
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}

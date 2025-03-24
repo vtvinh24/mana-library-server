@@ -1,0 +1,19 @@
+meta {
+  name: Import books
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8000/api/v1/books/import
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{staffToken}}
+}
+
+body:multipart-form {
+  booksFile: @file(/home/vtvinh24/WS/mana-library/mana-library-server/database/example/books.json) @contentType(application/json)
+}

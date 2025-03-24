@@ -1,0 +1,17 @@
+meta {
+  name: Refresh token
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:8000/api/v1/auth/refresh
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "refreshToken": "{{refreshToken}}"
+  }
+}

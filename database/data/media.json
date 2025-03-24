@@ -1,0 +1,952 @@
+[
+  {
+    "name": "The Midnight Library Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/midnight-library-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Midnight Library' by Matt Haig",
+    "mimeType": "image/jpeg",
+    "size": 245678,
+    "owner": null,
+    "tags": ["fiction", "fantasy", "philosophical fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Viking Press",
+      "year": 2020,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/midnight-library-cover-thumb.jpg",
+        "content": null,
+        "size": 24567
+      },
+      "medium": {
+        "path": "/uploads/media/medium/midnight-library-cover-medium.jpg",
+        "content": null,
+        "size": 124890
+      }
+    }
+  },
+  {
+    "name": "Sapiens Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/sapiens-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Sapiens: A Brief History of Humankind' by Yuval Noah Harari",
+    "mimeType": "image/jpeg",
+    "size": 312456,
+    "owner": null,
+    "tags": ["non-fiction", "history", "anthropology", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Harper",
+      "year": 2015,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/sapiens-cover-thumb.jpg",
+        "content": null,
+        "size": 31245
+      },
+      "medium": {
+        "path": "/uploads/media/medium/sapiens-cover-medium.jpg",
+        "content": null,
+        "size": 156228
+      }
+    }
+  },
+  {
+    "name": "Dune Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/dune-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Dune' by Frank Herbert",
+    "mimeType": "image/jpeg",
+    "size": 287934,
+    "owner": null,
+    "tags": ["science fiction", "fantasy", "adventure", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Ace Books",
+      "year": 1965,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/dune-cover-thumb.jpg",
+        "content": null,
+        "size": 28793
+      },
+      "medium": {
+        "path": "/uploads/media/medium/dune-cover-medium.jpg",
+        "content": null,
+        "size": 143967
+      }
+    }
+  },
+  {
+    "name": "Educated Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/educated-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Educated' by Tara Westover",
+    "mimeType": "image/jpeg",
+    "size": 256789,
+    "owner": null,
+    "tags": ["memoir", "biography", "non-fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Random House",
+      "year": 2018,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/educated-cover-thumb.jpg",
+        "content": null,
+        "size": 25678
+      },
+      "medium": {
+        "path": "/uploads/media/medium/educated-cover-medium.jpg",
+        "content": null,
+        "size": 128394
+      }
+    }
+  },
+  {
+    "name": "The Silent Patient Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/silent-patient-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Silent Patient' by Alex Michaelides",
+    "mimeType": "image/jpeg",
+    "size": 234567,
+    "owner": null,
+    "tags": ["thriller", "mystery", "psychological fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Celadon Books",
+      "year": 2019,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/silent-patient-cover-thumb.jpg",
+        "content": null,
+        "size": 23456
+      },
+      "medium": {
+        "path": "/uploads/media/medium/silent-patient-cover-medium.jpg",
+        "content": null,
+        "size": 117283
+      }
+    }
+  },
+  {
+    "name": "To Kill a Mockingbird Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/mockingbird-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'To Kill a Mockingbird' by Harper Lee",
+    "mimeType": "image/jpeg",
+    "size": 198765,
+    "owner": null,
+    "tags": ["classic", "fiction", "coming-of-age", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "HarperCollins",
+      "year": 1960,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/mockingbird-cover-thumb.jpg",
+        "content": null,
+        "size": 19876
+      },
+      "medium": {
+        "path": "/uploads/media/medium/mockingbird-cover-medium.jpg",
+        "content": null,
+        "size": 99382
+      }
+    }
+  },
+  {
+    "name": "Atomic Habits Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/atomic-habits-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Atomic Habits' by James Clear",
+    "mimeType": "image/jpeg",
+    "size": 267890,
+    "owner": null,
+    "tags": ["self-help", "personal development", "psychology", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Avery",
+      "year": 2018,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/atomic-habits-cover-thumb.jpg",
+        "content": null,
+        "size": 26789
+      },
+      "medium": {
+        "path": "/uploads/media/medium/atomic-habits-cover-medium.jpg",
+        "content": null,
+        "size": 133945
+      }
+    }
+  },
+  {
+    "name": "The Alchemist Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/alchemist-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Alchemist' by Paulo Coelho",
+    "mimeType": "image/jpeg",
+    "size": 223456,
+    "owner": null,
+    "tags": ["fiction", "fantasy", "philosophical fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "HarperOne",
+      "year": 1988,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/alchemist-cover-thumb.jpg",
+        "content": null,
+        "size": 22345
+      },
+      "medium": {
+        "path": "/uploads/media/medium/alchemist-cover-medium.jpg",
+        "content": null,
+        "size": 111728
+      }
+    }
+  },
+  {
+    "name": "1984 Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/1984-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for '1984' by George Orwell",
+    "mimeType": "image/jpeg",
+    "size": 190876,
+    "owner": null,
+    "tags": ["dystopian", "science fiction", "classic", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Signet Classic",
+      "year": 1949,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/1984-cover-thumb.jpg",
+        "content": null,
+        "size": 19087
+      },
+      "medium": {
+        "path": "/uploads/media/medium/1984-cover-medium.jpg",
+        "content": null,
+        "size": 95438
+      }
+    }
+  },
+  {
+    "name": "The Great Gatsby Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/gatsby-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Great Gatsby' by F. Scott Fitzgerald",
+    "mimeType": "image/jpeg",
+    "size": 187650,
+    "owner": null,
+    "tags": ["classic", "fiction", "literary fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Scribner",
+      "year": 1925,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/gatsby-cover-thumb.jpg",
+        "content": null,
+        "size": 18765
+      },
+      "medium": {
+        "path": "/uploads/media/medium/gatsby-cover-medium.jpg",
+        "content": null,
+        "size": 93825
+      }
+    }
+  },
+  {
+    "name": "Where the Crawdads Sing Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/crawdads-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Where the Crawdads Sing' by Delia Owens",
+    "mimeType": "image/jpeg",
+    "size": 245678,
+    "owner": null,
+    "tags": ["fiction", "coming-of-age", "mystery", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "G.P. Putnam's Sons",
+      "year": 2018,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/crawdads-cover-thumb.jpg",
+        "content": null,
+        "size": 24567
+      },
+      "medium": {
+        "path": "/uploads/media/medium/crawdads-cover-medium.jpg",
+        "content": null,
+        "size": 122839
+      }
+    }
+  },
+  {
+    "name": "A Brief History of Time Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/brief-history-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'A Brief History of Time' by Stephen Hawking",
+    "mimeType": "image/jpeg",
+    "size": 210987,
+    "owner": null,
+    "tags": ["science", "non-fiction", "physics", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Bantam",
+      "year": 1988,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/brief-history-cover-thumb.jpg",
+        "content": null,
+        "size": 21098
+      },
+      "medium": {
+        "path": "/uploads/media/medium/brief-history-cover-medium.jpg",
+        "content": null,
+        "size": 105493
+      }
+    }
+  },
+  {
+    "name": "The Hunger Games Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/hunger-games-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Hunger Games' by Suzanne Collins",
+    "mimeType": "image/jpeg",
+    "size": 256789,
+    "owner": null,
+    "tags": ["young adult", "science fiction", "dystopian", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Scholastic Press",
+      "year": 2008,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/hunger-games-cover-thumb.jpg",
+        "content": null,
+        "size": 25678
+      },
+      "medium": {
+        "path": "/uploads/media/medium/hunger-games-cover-medium.jpg",
+        "content": null,
+        "size": 128394
+      }
+    }
+  },
+  {
+    "name": "Becoming Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/becoming-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Becoming' by Michelle Obama",
+    "mimeType": "image/jpeg",
+    "size": 276543,
+    "owner": null,
+    "tags": ["autobiography", "memoir", "non-fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Crown Publishing",
+      "year": 2018,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/becoming-cover-thumb.jpg",
+        "content": null,
+        "size": 27654
+      },
+      "medium": {
+        "path": "/uploads/media/medium/becoming-cover-medium.jpg",
+        "content": null,
+        "size": 138271
+      }
+    }
+  },
+  {
+    "name": "The Hobbit Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/hobbit-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Hobbit' by J.R.R. Tolkien",
+    "mimeType": "image/jpeg",
+    "size": 232109,
+    "owner": null,
+    "tags": ["fantasy", "adventure", "fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Houghton Mifflin",
+      "year": 1937,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/hobbit-cover-thumb.jpg",
+        "content": null,
+        "size": 23210
+      },
+      "medium": {
+        "path": "/uploads/media/medium/hobbit-cover-medium.jpg",
+        "content": null,
+        "size": 116054
+      }
+    }
+  },
+  {
+    "name": "The Power of Habit Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/power-habit-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Power of Habit' by Charles Duhigg",
+    "mimeType": "image/jpeg",
+    "size": 245678,
+    "owner": null,
+    "tags": ["psychology", "self-help", "non-fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Random House",
+      "year": 2012,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/power-habit-cover-thumb.jpg",
+        "content": null,
+        "size": 24567
+      },
+      "medium": {
+        "path": "/uploads/media/medium/power-habit-cover-medium.jpg",
+        "content": null,
+        "size": 122839
+      }
+    }
+  },
+  {
+    "name": "The Girl on the Train Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/girl-train-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Girl on the Train' by Paula Hawkins",
+    "mimeType": "image/jpeg",
+    "size": 218765,
+    "owner": null,
+    "tags": ["thriller", "mystery", "fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Riverhead Books",
+      "year": 2015,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/girl-train-cover-thumb.jpg",
+        "content": null,
+        "size": 21876
+      },
+      "medium": {
+        "path": "/uploads/media/medium/girl-train-cover-medium.jpg",
+        "content": null,
+        "size": 109382
+      }
+    }
+  },
+  {
+    "name": "The Code Breaker Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/code-breaker-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'The Code Breaker' by Walter Isaacson",
+    "mimeType": "image/jpeg",
+    "size": 298765,
+    "owner": null,
+    "tags": ["biography", "science", "non-fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "Simon & Schuster",
+      "year": 2021,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/code-breaker-cover-thumb.jpg",
+        "content": null,
+        "size": 29876
+      },
+      "medium": {
+        "path": "/uploads/media/medium/code-breaker-cover-medium.jpg",
+        "content": null,
+        "size": 149382
+      }
+    }
+  },
+  {
+    "name": "Pride and Prejudice Cover",
+    "mediaType": "IMAGE",
+    "path": "/uploads/media/pride-prejudice-cover.jpg",
+    "isInlineContent": false,
+    "content": null,
+    "isUrl": false,
+    "description": "Cover image for 'Pride and Prejudice' by Jane Austen",
+    "mimeType": "image/jpeg",
+    "size": 175432,
+    "owner": null,
+    "tags": ["classic", "romance", "fiction", "book cover"],
+    "url": null,
+    "isPublic": true,
+    "metadata": {
+      "width": 800,
+      "height": 1200,
+      "source": "Publisher provided"
+    },
+    "format": "JPEG",
+    "duration": null,
+    "copyright": {
+      "holder": "T. Egerton",
+      "year": 1813,
+      "restrictions": "All rights reserved"
+    },
+    "associatedBook": null,
+    "accessControl": {
+      "requiresAuthentication": false,
+      "allowedRoles": [],
+      "checkoutEnabled": false
+    },
+    "stats": {
+      "views": 0,
+      "downloads": 0,
+      "lastAccessed": null
+    },
+    "variants": {
+      "thumbnail": {
+        "path": "/uploads/media/thumbnails/pride-prejudice-cover-thumb.jpg",
+        "content": null,
+        "size": 17543
+      },
+      "medium": {
+        "path": "/uploads/media/medium/pride-prejudice-cover-medium.jpg",
+        "content": null,
+        "size": 87716
+      }
+    }
+  }
+]

@@ -1,0 +1,19 @@
+meta {
+  name: Remove a favorite book
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:8000/api/v1/users//:bookId
+  body: none
+  auth: bearer
+}
+
+params:path {
+  bookId: 67da1f78e645060b9dbb9cb3
+}
+
+auth:bearer {
+  token: {{token}}
+}

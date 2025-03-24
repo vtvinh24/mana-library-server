@@ -9,11 +9,28 @@
     "description": "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.",
     "pages": 304,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-    "location": "Fiction Section, Shelf F7",
-    "status": "available",
-    "condition": "new",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "ML-001",
+        "condition": "new",
+        "status": "available",
+        "location": "Fiction Section, Shelf F7"
+      },
+      {
+        "copyId": "ML-002",
+        "condition": "new",
+        "status": "available",
+        "location": "Fiction Section, Shelf F7"
+      },
+      {
+        "copyId": "ML-003",
+        "condition": "new",
+        "status": "available",
+        "location": "Fiction Section, Shelf F7"
+      }
+    ],
     "acquisitionDate": "2023-07-15T00:00:00.000Z",
     "price": 24.99,
     "deweyDecimal": "813.6",
@@ -29,11 +46,34 @@
     "description": "A groundbreaking narrative of humanity's creation and evolution that explores the ways in which biology and history have defined us.",
     "pages": 464,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73",
-    "location": "History Section, Shelf H2",
-    "status": "borrowed",
-    "condition": "good",
-    "copies": 4,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 4,
+    "copies": [
+      {
+        "copyId": "SAP-001",
+        "condition": "good",
+        "status": "borrowed",
+        "location": "History Section, Shelf H2"
+      },
+      {
+        "copyId": "SAP-002",
+        "condition": "good",
+        "status": "available",
+        "location": "History Section, Shelf H2"
+      },
+      {
+        "copyId": "SAP-003",
+        "condition": "good",
+        "status": "available",
+        "location": "History Section, Shelf H2"
+      },
+      {
+        "copyId": "SAP-004",
+        "condition": "good",
+        "status": "available",
+        "location": "History Section, Shelf H2"
+      }
+    ],
     "acquisitionDate": "2022-02-10T00:00:00.000Z",
     "price": 22.99,
     "deweyDecimal": "909.0982",
@@ -49,11 +89,28 @@
     "description": "Set in the distant future amidst a feudal interstellar society, Dune tells the story of young Paul Atreides, whose family accepts the stewardship of the desert planet Arrakis.",
     "pages": 688,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1604169694058-13ebc4e2d711",
-    "location": "Sci-Fi Section, Shelf S3",
-    "status": "available",
-    "condition": "good",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "DUNE-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Sci-Fi Section, Shelf S3"
+      },
+      {
+        "copyId": "DUNE-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Sci-Fi Section, Shelf S3"
+      },
+      {
+        "copyId": "DUNE-003",
+        "condition": "good",
+        "status": "available",
+        "location": "Sci-Fi Section, Shelf S3"
+      }
+    ],
     "acquisitionDate": "2021-09-01T00:00:00.000Z",
     "price": 18.99,
     "deweyDecimal": "813.54",
@@ -69,11 +126,22 @@
     "description": "A memoir about a young girl who, kept out of school, leaves her survivalist family and goes on to earn a PhD from Cambridge University.",
     "pages": 334,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc",
-    "location": "Biography Section, Shelf B5",
-    "status": "available",
-    "condition": "good",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "EDU-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Biography Section, Shelf B5"
+      },
+      {
+        "copyId": "EDU-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Biography Section, Shelf B5"
+      }
+    ],
     "acquisitionDate": "2022-05-23T00:00:00.000Z",
     "price": 17.99,
     "deweyDecimal": "270.092",
@@ -89,11 +157,22 @@
     "description": "A psychological thriller about a woman's act of violence against her husband—and of the therapist obsessed with uncovering her motive.",
     "pages": 325,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1610882648335-ced678ff4ccb",
-    "location": "Mystery Section, Shelf M8",
-    "status": "borrowed",
-    "condition": "good",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "SP-001",
+        "condition": "good",
+        "status": "borrowed",
+        "location": "Mystery Section, Shelf M8"
+      },
+      {
+        "copyId": "SP-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Mystery Section, Shelf M8"
+      }
+    ],
     "acquisitionDate": "2023-01-12T00:00:00.000Z",
     "price": 16.99,
     "deweyDecimal": "813.6",
@@ -109,11 +188,40 @@
     "description": "A story of innocence and experience, kindness and cruelty, love and hatred in the American South during the Great Depression.",
     "pages": 336,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1603162617002-afc02e3594f2",
-    "location": "Classics Section, Shelf C1",
-    "status": "available",
-    "condition": "fair",
-    "copies": 5,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 5,
+    "copies": [
+      {
+        "copyId": "TKM-001",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "TKM-002",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "TKM-003",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "TKM-004",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "TKM-005",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      }
+    ],
     "acquisitionDate": "2020-08-17T00:00:00.000Z",
     "price": 14.99,
     "deweyDecimal": "813.52",
@@ -129,11 +237,34 @@
     "description": "A practical guide to breaking bad habits and building good ones by focusing on tiny changes that lead to remarkable results.",
     "pages": 320,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1553729459-efe14ef6055d",
-    "location": "Self-Help Section, Shelf S2",
-    "status": "reserved",
-    "condition": "new",
-    "copies": 4,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 4,
+    "copies": [
+      {
+        "copyId": "AH-001",
+        "condition": "new",
+        "status": "reserved",
+        "location": "Self-Help Section, Shelf S2"
+      },
+      {
+        "copyId": "AH-002",
+        "condition": "new",
+        "status": "available",
+        "location": "Self-Help Section, Shelf S2"
+      },
+      {
+        "copyId": "AH-003",
+        "condition": "new",
+        "status": "available",
+        "location": "Self-Help Section, Shelf S2"
+      },
+      {
+        "copyId": "AH-004",
+        "condition": "new",
+        "status": "available",
+        "location": "Self-Help Section, Shelf S2"
+      }
+    ],
     "acquisitionDate": "2022-11-05T00:00:00.000Z",
     "price": 27.0,
     "deweyDecimal": "158.1",
@@ -149,11 +280,28 @@
     "description": "A magical story about following your dreams and listening to your heart, featuring a Spanish shepherd on a journey to the Egyptian pyramids.",
     "pages": 208,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1603475276603-3836d0621096",
-    "location": "Fiction Section, Shelf F3",
-    "status": "borrowed",
-    "condition": "good",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "ALC-001",
+        "condition": "good",
+        "status": "borrowed",
+        "location": "Fiction Section, Shelf F3"
+      },
+      {
+        "copyId": "ALC-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Fiction Section, Shelf F3"
+      },
+      {
+        "copyId": "ALC-003",
+        "condition": "good",
+        "status": "available",
+        "location": "Fiction Section, Shelf F3"
+      }
+    ],
     "acquisitionDate": "2021-03-22T00:00:00.000Z",
     "price": 16.99,
     "deweyDecimal": "869.3",
@@ -169,11 +317,34 @@
     "description": "A chilling portrait of a totalitarian regime where Big Brother is always watching and individuality is obliterated.",
     "pages": 328,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1504610494199-b93e12e4e290",
-    "location": "Classics Section, Shelf C2",
-    "status": "available",
-    "condition": "fair",
-    "copies": 4,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 4,
+    "copies": [
+      {
+        "copyId": "1984-001",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C2"
+      },
+      {
+        "copyId": "1984-002",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C2"
+      },
+      {
+        "copyId": "1984-003",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C2"
+      },
+      {
+        "copyId": "1984-004",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C2"
+      }
+    ],
     "acquisitionDate": "2020-05-10T00:00:00.000Z",
     "price": 12.99,
     "deweyDecimal": "823.912",
@@ -189,11 +360,28 @@
     "description": "A tragic love story set in the Jazz Age, depicting the pursuit of wealth, ambition, and the American Dream.",
     "pages": 180,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1580482786605-62921c44bcb5",
-    "location": "Classics Section, Shelf C1",
-    "status": "available",
-    "condition": "poor",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "GG-001",
+        "condition": "poor",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "GG-002",
+        "condition": "poor",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      },
+      {
+        "copyId": "GG-003",
+        "condition": "poor",
+        "status": "available",
+        "location": "Classics Section, Shelf C1"
+      }
+    ],
     "acquisitionDate": "2020-01-15T00:00:00.000Z",
     "price": 15.0,
     "deweyDecimal": "813.52",
@@ -209,11 +397,22 @@
     "description": "A coming-of-age story and possible murder mystery about a young woman who grows up isolated in the marshes of North Carolina.",
     "pages": 384,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1568667256549-094345857637",
-    "location": "Fiction Section, Shelf F9",
-    "status": "available",
-    "condition": "good",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "WCS-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Fiction Section, Shelf F9"
+      },
+      {
+        "copyId": "WCS-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Fiction Section, Shelf F9"
+      }
+    ],
     "acquisitionDate": "2022-07-18T00:00:00.000Z",
     "price": 18.0,
     "deweyDecimal": "813.6",
@@ -229,11 +428,22 @@
     "description": "This landmark volume explores complex concepts like the origin and nature of the universe, black holes, and the nature of time itself.",
     "pages": 212,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
-    "location": "Science Section, Shelf S5",
-    "status": "borrowed",
-    "condition": "fair",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "BHT-001",
+        "condition": "fair",
+        "status": "borrowed",
+        "location": "Science Section, Shelf S5"
+      },
+      {
+        "copyId": "BHT-002",
+        "condition": "fair",
+        "status": "available",
+        "location": "Science Section, Shelf S5"
+      }
+    ],
     "acquisitionDate": "2021-06-30T00:00:00.000Z",
     "price": 18.99,
     "deweyDecimal": "523.1",
@@ -249,11 +459,28 @@
     "description": "In a future North America, where the rulers maintain control through an annual televised survival competition, sixteen-year-old Katniss's skills are put to the test when she voluntarily takes her younger sister's place.",
     "pages": 374,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1554243610-edf6604aceb1",
-    "location": "Young Adult Section, Shelf Y4",
-    "status": "available",
-    "condition": "good",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "THG-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Young Adult Section, Shelf Y4"
+      },
+      {
+        "copyId": "THG-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Young Adult Section, Shelf Y4"
+      },
+      {
+        "copyId": "THG-003",
+        "condition": "good",
+        "status": "available",
+        "location": "Young Adult Section, Shelf Y4"
+      }
+    ],
     "acquisitionDate": "2021-11-25T00:00:00.000Z",
     "price": 12.99,
     "deweyDecimal": "813.6",
@@ -269,11 +496,28 @@
     "description": "A deeply personal memoir by Michelle Obama that invites readers into her world, chronicling the experiences that have shaped her.",
     "pages": 448,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-    "location": "Biography Section, Shelf B2",
-    "status": "reserved",
-    "condition": "new",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "BEC-001",
+        "condition": "new",
+        "status": "reserved",
+        "location": "Biography Section, Shelf B2"
+      },
+      {
+        "copyId": "BEC-002",
+        "condition": "new",
+        "status": "available",
+        "location": "Biography Section, Shelf B2"
+      },
+      {
+        "copyId": "BEC-003",
+        "condition": "new",
+        "status": "available",
+        "location": "Biography Section, Shelf B2"
+      }
+    ],
     "acquisitionDate": "2022-09-07T00:00:00.000Z",
     "price": 32.5,
     "deweyDecimal": "973.932092",
@@ -289,11 +533,34 @@
     "description": "The prelude to The Lord of the Rings, The Hobbit follows Bilbo Baggins on an unexpected journey to reclaim a stolen treasure guarded by a dragon.",
     "pages": 366,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1618666012174-83b441c0bc76",
-    "location": "Fantasy Section, Shelf F2",
-    "status": "available",
-    "condition": "good",
-    "copies": 4,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 4,
+    "copies": [
+      {
+        "copyId": "HOB-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Fantasy Section, Shelf F2"
+      },
+      {
+        "copyId": "HOB-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Fantasy Section, Shelf F2"
+      },
+      {
+        "copyId": "HOB-003",
+        "condition": "good",
+        "status": "available",
+        "location": "Fantasy Section, Shelf F2"
+      },
+      {
+        "copyId": "HOB-004",
+        "condition": "good",
+        "status": "available",
+        "location": "Fantasy Section, Shelf F2"
+      }
+    ],
     "acquisitionDate": "2020-10-09T00:00:00.000Z",
     "price": 14.99,
     "deweyDecimal": "823.912",
@@ -309,11 +576,22 @@
     "description": "An award-winning business reporter explores why habits exist and how they can be changed to transform our businesses, communities, and lives.",
     "pages": 371,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
-    "location": "Psychology Section, Shelf P3",
-    "status": "borrowed",
-    "condition": "good",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "POH-001",
+        "condition": "good",
+        "status": "borrowed",
+        "location": "Psychology Section, Shelf P3"
+      },
+      {
+        "copyId": "POH-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Psychology Section, Shelf P3"
+      }
+    ],
     "acquisitionDate": "2022-03-16T00:00:00.000Z",
     "price": 17.0,
     "deweyDecimal": "158.1",
@@ -329,11 +607,22 @@
     "description": "A psychological thriller about a woman who becomes entangled in a missing person investigation that promises to send shockwaves throughout her life.",
     "pages": 336,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1587876931567-564ce588bfbd",
-    "location": "Mystery Section, Shelf M6",
-    "status": "available",
-    "condition": "good",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "GOT-001",
+        "condition": "good",
+        "status": "available",
+        "location": "Mystery Section, Shelf M6"
+      },
+      {
+        "copyId": "GOT-002",
+        "condition": "good",
+        "status": "available",
+        "location": "Mystery Section, Shelf M6"
+      }
+    ],
     "acquisitionDate": "2021-08-20T00:00:00.000Z",
     "price": 16.0,
     "deweyDecimal": "823.92",
@@ -349,11 +638,22 @@
     "description": "The story of Nobel Prize winner Jennifer Doudna and her colleagues who developed CRISPR, a tool that can edit DNA.",
     "pages": 560,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1564981797816-1043664bf78d",
-    "location": "Science Section, Shelf S1",
-    "status": "available",
-    "condition": "new",
-    "copies": 2,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 2,
+    "copies": [
+      {
+        "copyId": "CB-001",
+        "condition": "new",
+        "status": "available",
+        "location": "Science Section, Shelf S1"
+      },
+      {
+        "copyId": "CB-002",
+        "condition": "new",
+        "status": "available",
+        "location": "Science Section, Shelf S1"
+      }
+    ],
     "acquisitionDate": "2023-02-28T00:00:00.000Z",
     "price": 35.0,
     "deweyDecimal": "576.5092",
@@ -369,34 +669,31 @@
     "description": "A romantic novel following the character of Elizabeth Bennet as she deals with issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England.",
     "pages": 480,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-    "location": "Classics Section, Shelf C3",
-    "status": "available",
-    "condition": "fair",
-    "copies": 3,
+    "coverImage": "000000000000000000000000",
+    "totalCopies": 3,
+    "copies": [
+      {
+        "copyId": "PP-001",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C3"
+      },
+      {
+        "copyId": "PP-002",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C3"
+      },
+      {
+        "copyId": "PP-003",
+        "condition": "fair",
+        "status": "available",
+        "location": "Classics Section, Shelf C3"
+      }
+    ],
     "acquisitionDate": "2020-03-08T00:00:00.000Z",
     "price": 9.99,
     "deweyDecimal": "823.7",
     "tags": ["regency", "marriage", "social class", "english literature"]
-  },
-  {
-    "title": "Thinking, Fast and Slow",
-    "author": "Daniel Kahneman",
-    "ISBN": "978-0-374-53355-7",
-    "publisher": "Farrar, Straus and Giroux",
-    "publicationYear": 2011,
-    "genre": ["Psychology", "Economics", "Non-fiction"],
-    "description": "Nobel Prize winner Kahneman's exploration of the two systems that drive the way we think: the fast, intuitive, and emotional system; and the slow, deliberate, and logical system.",
-    "pages": 512,
-    "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8",
-    "location": "Psychology Section, Shelf P2",
-    "status": "lost",
-    "condition": "fair",
-    "copies": 1,
-    "acquisitionDate": "2021-05-19T00:00:00.000Z",
-    "price": 20.0,
-    "deweyDecimal": "153.42",
-    "tags": ["cognitive bias", "decision-making", "behavioral economics", "psychology"]
   }
 ]
