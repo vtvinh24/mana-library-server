@@ -88,6 +88,7 @@ const returnBook = async (req, res) => {
         status: newBookStatus,
         borrowedBy: null,
         dueDate: null,
+        $inc: { borrowedCopies: -1 },
       },
       { new: true }
     );

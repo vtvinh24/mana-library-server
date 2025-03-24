@@ -90,25 +90,33 @@ const borrowBook = async (req, res) => {
       }
     }
 
+    const availableCopies = book.copies - book.borrowedCopies;
+    if (availableCopies <= 0) {
+      return res.status(400).json({ message: "No available copies of this book" });
+    } else {
+      // Update borrowed copies count with atomic operation
+      await Book.findOne({ _id: bookId, status: "available" }).updateOne({ $inc: { borrowedCopies: 1 } });
+    }
+
     // All checks passed, proceed with borrowing the book
     const borrowDate = new Date();
     const dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + 14); // 14 days loan period
 
     // Update book status with atomic operation
-    const updatedBook = await Book.findOneAndUpdate(
-      { _id: bookId, $or: [{ status: "available" }, { status: "reserved" }] },
-      {
-        status: "borrowed",
-        borrowedBy: userId,
-        dueDate: dueDate,
-      },
-      { new: true }
-    );
+    // const updatedBook = await Book.findOneAndUpdate(
+    //   { _id: bookId, $or: [{ status: "available" }, { status: "reserved" }] },
+    //   {
+    //     status: "borrowed",
+    //     borrowedBy: userId,
+    //     dueDate: dueDate,
+    //   },
+    //   { new: true }
+    // );
 
-    if (!updatedBook) {
-      return res.status(400).json({ message: "Book is no longer available" });
-    }
+    // if (!updatedBook) {
+    //   return res.status(400).json({ message: "Book is no longer available" });
+    // }
 
     // Update user's borrowed list with atomic operation
     const updatedUser = await User.findOneAndUpdate(
