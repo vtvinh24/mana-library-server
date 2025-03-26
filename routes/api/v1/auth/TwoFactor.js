@@ -1,7 +1,6 @@
 const { log } = require("#common/Logger.js");
 const { generateTOTP, verifyTOTP } = require("#common/OTPAuth.js");
-const { OtpSecretError } = require("#enum/Error.js");
-const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
+const { MESSAGES } = require("#enum/Message.js");
 const User = require("#models/User.js");
 const AuditLogger = require("#services/AuditLogger.js");
 
@@ -60,13 +59,10 @@ const toggle2FA = async (req, res) => {
         enabled: newVal,
       });
     }
-    return res.status(CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.status });
+    return res.status(401).json({ message: "Invalid two factor code" });
   } catch (err) {
-    if (err === OtpSecretError) {
-      return res.status(CUSTOM_HTTP_STATUS.AUTH_2FA_DISABLED.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_2FA_DISABLED.status });
-    }
     log(err, "ERROR", "routes POST /auth/2fa/toggle");
-    return res.status(500).json({ message: "An error occurred while processing your request" });
+    return res.status(500).json({ message: MESSAGES.INTERNAL_SERVER_ERROR });
   }
 };
 
@@ -89,7 +85,7 @@ const verify2FA = async (req, res) => {
     if (enabled) {
       const valid = await verifyTOTP(user, code);
       if (valid) return res.status(200).json({ message: "Two-factor authentication verified successfully" });
-      else return res.status(CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.status });
+      else return res.status(401).json({ message: "Invalid two-factor authentication code" });
     } else {
       return res.status(403).json({ message: "Two-factor authentication is not enabled for this account" });
     }

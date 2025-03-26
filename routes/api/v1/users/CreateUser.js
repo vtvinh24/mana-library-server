@@ -3,7 +3,6 @@ const { filteredUser, generateIdentifier } = require("#models/utils/UserUtils.js
 const { log } = require("#common/Logger.js");
 const { getHash, generateSalt } = require("#common/Hasher.js");
 const { getComplexity } = require("#common/Password.js");
-const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
 
 const createUser = async (req, res) => {
   try {
@@ -17,7 +16,7 @@ const createUser = async (req, res) => {
     // Check if user with this email already exists
     const existingUser = await User.findOne({ "auth.email": email.toLowerCase() });
     if (existingUser) {
-      return res.status(CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.message });
+      return res.status(409).json({ message: "Email already in use" });
     }
 
     // Check password complexity if provided
@@ -39,7 +38,7 @@ const createUser = async (req, res) => {
     try {
       finalUsername = await generateIdentifier(email);
     } catch (err) {
-      return res.status(CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.message });
+      return res.status(409).json({ message: "Username tag generation failed" });
     }
 
     // Create new user with provided info

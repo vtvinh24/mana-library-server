@@ -2,7 +2,6 @@ const OTPAuth = require("otpauth");
 const User = require("#models/User.js");
 const { generateBase32 } = require("./Hasher");
 const QRCode = require("qrcode");
-const { OtpSecretError } = require("#enum/Error.js");
 const Env = require("#config/Env.js");
 const { log } = require("./Logger");
 
@@ -57,7 +56,7 @@ async function verifyTOTP(user, token, window = 1) {
     throw new Error("Invalid user object");
   }
   if (!user.auth.twoFactor.secret) {
-    throw OtpSecretError;
+    throw new Error("User does not have a TOTP secret");
   }
 
   // Create TOTP instance using the user's secret

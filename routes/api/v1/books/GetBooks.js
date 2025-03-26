@@ -1,11 +1,6 @@
 const { log } = require("#common/Logger.js");
 const Book = require("#models/Book.js");
 
-/**
- * Get all books with filtering, pagination and sorting
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- */
 const getBooks = async (req, res) => {
   try {
     const { page = 1, limit = 10, title, author, ISBN, publisher, genre, status, language, publicationYear, availableOnly = false, sortBy = "title", sortOrder = "asc" } = req.query;

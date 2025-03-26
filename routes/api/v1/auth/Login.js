@@ -5,7 +5,6 @@ const Env = require("#config/Env.js");
 const AuditLogger = require("#services/AuditLogger.js");
 const { log } = require("#common/Logger.js");
 const { verifyTOTP } = require("#common/OTPAuth.js");
-const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
 
 /**
  * Handle user login
@@ -69,7 +68,7 @@ const login = async (req, res) => {
       const validCode = await verifyTOTP(user, code);
       if (!validCode) {
         AuditLogger.auth.loginFailure(email, clientIp, "invalid_2fa_code");
-        return res.status(CUSTOM_HTTP_STATUS.AUTH_2FA_INVALID.code).json({
+        return res.status(401).json({
           message: "Invalid two-factor authentication code",
         });
       }

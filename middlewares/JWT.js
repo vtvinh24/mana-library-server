@@ -1,9 +1,9 @@
 const { verifyToken, createToken } = require("#common/JWT.js");
 const User = require("#models/User.js");
-const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
 const Env = require("#config/Env.js");
 const tokenBlacklist = require("#services/TokenBlacklist.js");
 const { log } = require("#common/Logger.js");
+const { MESSAGES } = require("#enum/Message.js");
 
 /**
  * This middleware checks if the user has a valid JWT token
@@ -24,7 +24,7 @@ const JwtMiddleware = async (req, res, next) => {
 
     // Check if token has been blacklisted
     if (decoded.jti && tokenBlacklist.isBlacklisted(decoded.jti)) {
-      return res.status(401).json({ message: "Unauthorized: token has been revoked" });
+      return res.status(401).json({ message: MESSAGES.TOKEN_BLACKLISTED });
     }
 
     // Add safety check for token payload
@@ -37,7 +37,7 @@ const JwtMiddleware = async (req, res, next) => {
     const tokenAge = Date.now() / 1000 - decoded.iat;
     const maxTokenAge = 7 * 24 * 60 * 60; // 7 days in seconds
     if (tokenAge > maxTokenAge) {
-      return res.status(401).json({ message: "Unauthorized: token too old" });
+      return res.status(401).json({ message: MESSAGES.TOKEN_EXPIRED });
     }
 
     // Look up user with a lean query for better performance
@@ -49,7 +49,7 @@ const JwtMiddleware = async (req, res, next) => {
     }
 
     if (user.auth.banned) {
-      return res.status(403).json({ message: "Forbidden: account is suspended" });
+      return res.status(403).json({ message: MESSAGES.ACCOUNT_SUSPENDED });
     }
 
     // Store token in request for potential later revocation
@@ -62,8 +62,8 @@ const JwtMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
-      return res.status(CUSTOM_HTTP_STATUS.AUTH_TOKEN_EXPIRED.code).json({
-        message: CUSTOM_HTTP_STATUS.AUTH_TOKEN_EXPIRED.status,
+      return res.status(401).json({
+        message: MESSAGES.TOKEN_EXPIRED,
       });
     }
 
@@ -79,7 +79,7 @@ const JwtMiddleware = async (req, res, next) => {
  */
 const requireAuth = (req, res, next) => {
   if (!req.authenticated) {
-    return res.status(401).json({ message: "Authentication required" });
+    return res.status(401).json({ message: MESSAGES.AUTH_REQUIRED });
   }
   next();
 };
@@ -93,7 +93,7 @@ const requireRoles = (allowedRoles) => {
   return (req, res, next) => {
     // First ensure user is authenticated
     if (!req.authenticated) {
-      return res.status(401).json({ message: "Authentication required" });
+      return res.status(401).json({ message: MESSAGES.AUTH_REQUIRED });
     }
 
     // Convert single role to array for consistent handling
@@ -110,7 +110,7 @@ const requireRoles = (allowedRoles) => {
       log(`Access denied: User ${req.userId} with role ${req.role} attempted to access resource requiring ${roles.join(", ")}`, "WARN", "SECURITY");
 
       return res.status(403).json({
-        message: "Forbidden: You don't have permission to access this resource",
+        message: MESSAGES.PERMISSION_DENIED,
       });
     }
 
@@ -125,7 +125,7 @@ const logout = async (req, res) => {
   try {
     // Check if user is authenticated
     if (!req.authenticated || !req.tokenJti) {
-      return res.status(200).json({ message: "Already logged out" });
+      return res.status(401).json({ message: MESSAGES.AUTH_REQUIRED });
     }
 
     // Get token expiration from payload
@@ -136,10 +136,10 @@ const logout = async (req, res) => {
     tokenBlacklist.addToBlacklist(req.tokenJti, expirySeconds);
 
     log(`User ${req.userId} logged out`, "INFO", "AUTH");
-    res.status(200).json({ message: "Successfully logged out" });
+    res.status(200).send();
   } catch (error) {
     log("Logout error: " + error.message, "ERROR", "SECURITY");
-    res.status(500).json({ message: "Failed to process logout" });
+    res.status(500).send();
   }
 };
 
@@ -152,7 +152,7 @@ const refreshToken = async (req, res) => {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
-      return res.status(400).json({ message: "Refresh token is required" });
+      return res.status(400).send();
     }
 
     // Verify the refresh token

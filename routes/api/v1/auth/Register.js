@@ -5,8 +5,6 @@ const { createToken } = require("#common/JWT.js");
 const { filteredUser, generateIdentifier } = require("#models/utils/UserUtils.js");
 const { isEmail } = require("#common/Validator.js");
 const { getComplexity } = require("#common/Password.js");
-const { TagNotGeneratedError } = require("#enum/Error.js");
-const { CUSTOM_HTTP_STATUS } = require("#enum/HttpStatus.js");
 const Env = require("#config/Env.js");
 const { sendMail } = require("#common/Mailer.js");
 
@@ -23,7 +21,7 @@ const register = async (req, res) => {
 
     const user = await User.findOne({ "auth.email": email });
     if (user) {
-      return res.status(CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.code).json({ message: CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.message });
+      return res.status(409).json({ message: "Email already in use" });
     }
 
     const complexity = getComplexity(password);
@@ -39,7 +37,7 @@ const register = async (req, res) => {
       finalUsername = await generateIdentifier(email);
     } catch (err) {
       if (err === TagNotGeneratedError) {
-        return res.status(CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN).json({ message: CUSTOM_HTTP_STATUS.AUTH_INFO_TAKEN.message });
+        return res.status(409).json({ message: "Username tag generation failed" });
       }
     }
 

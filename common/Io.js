@@ -1,7 +1,6 @@
 const { Server } = require("socket.io");
 const { log } = require("#common/Logger.js");
 const { SOCKET_INITIALIZED } = require("#enum/Message.js");
-const { SOCKET_NOT_INITIALIZED, userNotFoundError, socketAuthError } = require("#enum/Error.js");
 const User = require("#models/User.js");
 const { verifyToken } = require("./JWT");
 const Env = require("#config/Env.js");
