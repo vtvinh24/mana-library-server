@@ -1,5 +1,6 @@
 const { log } = require("#common/Logger.js");
-const User = require("#models/User.js");
+const Book = require("#models/Book.js");
+const mongoose = require("mongoose");
 
 /**
  * Get books currently borrowed by the authenticated user
@@ -9,19 +10,45 @@ const User = require("#models/User.js");
 const getBorrowedBooks = async (req, res) => {
   try {
     const userId = req.userId;
+    const objectId = new mongoose.Types.ObjectId(userId);
 
-    // Find user and populate borrowed books
-    const user = await User.findById(userId).populate({
-      path: "library.borrowedBooks.book",
-      select: "title author ISBN publisher publicationYear genre description coverImage status",
-    });
+    // Find books with at least one copy borrowed by this user
+    const books = await Book.find({
+      copies: {
+        $elemMatch: {
+          status: "borrowed",
+          userId: objectId,
+        },
+      },
+    }).select("title author ISBN publisher publicationYear genre description coverImage copies");
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    // Format the response data to include copy information
+    const borrowedBooks = books
+      .map((book) => {
+        // Find copies borrowed by this user
+        const userCopies = book.copies.filter((copy) => copy.status === "borrowed" && copy.userId && copy.userId.equals(objectId));
 
-    // Filter only currently borrowed books (not returned)
-    const borrowedBooks = user.library.borrowedBooks.filter((item) => item.status === "BORROWED");
+        return userCopies.map((copy) => ({
+          book: {
+            _id: book._id,
+            title: book.title,
+            author: book.author,
+            ISBN: book.ISBN,
+            publisher: book.publisher,
+            publicationYear: book.publicationYear,
+            genre: book.genre,
+            description: book.description,
+            coverImage: book.coverImage,
+          },
+          borrowedAt: copy.updatedAt || new Date(),
+          dueDate: copy.dueDate,
+          status: "BORROWED",
+          copyId: copy._id,
+          condition: copy.condition,
+          note: copy.note,
+        }));
+      })
+      .flat();
 
     return res.status(200).json({
       count: borrowedBooks.length,

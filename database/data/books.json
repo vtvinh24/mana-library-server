@@ -1,57 +1,455 @@
 [
   {
-    "title": "The Midnight Library",
-    "author": "Matt Haig",
-    "ISBN": "978-0-525-55920-1",
-    "publisher": "Viking",
-    "publicationYear": 2020,
-    "genre": ["Fiction", "Fantasy", "Philosophical Fiction"],
-    "description": "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.",
-    "pages": 304,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "ISBN": "978-0743273565",
+    "publisher": "Scribner",
+    "publicationYear": 1925,
+    "genre": ["Fiction", "Classics", "Literature"],
+    "description": "Set in the Jazz Age, the novel tells the tragic story of Jay Gatsby and his pursuit of Daisy Buchanan.",
+    "pages": 180,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
+    "coverImage": "/images/covers/great-gatsby.jpg",
     "copies": [
-      { "condition": "new", "status": "available" },
-      { "condition": "new", "status": "available" },
-      { "condition": "new", "status": "available" }
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Small tear on page 42"
+      }
     ],
-    "tags": ["life choices", "regret", "possibilities", "parallel lives"]
+    "tags": ["jazz age", "american dream", "tragedy"],
+    "restricted": false,
+    "createdAt": "2023-01-15T08:30:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1b"
   },
   {
-    "title": "Sapiens: A Brief History of Humankind",
-    "author": "Yuval Noah Harari",
-    "ISBN": "978-0-062-31609-7",
-    "publisher": "Harper",
-    "publicationYear": 2015,
-    "genre": ["Non-fiction", "History", "Anthropology"],
-    "description": "A groundbreaking narrative of humanity's creation and evolution that explores the ways in which biology and history have defined us.",
-    "pages": 464,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "ISBN": "978-0060935467",
+    "publisher": "Harper Perennial",
+    "publicationYear": 1960,
+    "genre": ["Fiction", "Classics", "Historical Fiction"],
+    "description": "The story of racial injustice and moral growth as seen through the eyes of a young girl in Alabama.",
+    "pages": 336,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73",
+    "coverImage": "/images/covers/mockingbird.jpg",
     "copies": [
-      { "condition": "good", "status": "borrowed", "userId": "609c17fc95e72d3c4c97fcee" },
-      { "condition": "good", "status": "available" },
-      { "condition": "good", "status": "available" },
-      { "condition": "fair", "status": "available" }
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Worn cover"
+      }
     ],
-    "tags": ["human evolution", "anthropology", "civilization", "cognitive revolution"]
+    "tags": ["racism", "coming of age", "southern gothic"],
+    "restricted": false,
+    "createdAt": "2023-01-16T10:15:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1b"
+  },
+  {
+    "title": "Rare Manuscript Collection",
+    "author": "Various Authors",
+    "ISBN": "978-1234567890",
+    "publisher": "University Press",
+    "publicationYear": 1998,
+    "genre": ["Academic", "Research", "History"],
+    "description": "Collection of rare historical manuscripts for research purposes only.",
+    "pages": 450,
+    "language": "Multiple",
+    "coverImage": "/images/covers/manuscript.jpg",
+    "copies": [
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Reference only, not for borrowing"
+      }
+    ],
+    "tags": ["rare", "historical", "reference"],
+    "restricted": true,
+    "createdAt": "2023-02-01T11:20:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1e"
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "ISBN": "978-0451524935",
+    "publisher": "Signet Classic",
+    "publicationYear": 1949,
+    "genre": ["Fiction", "Dystopian", "Classics"],
+    "description": "A chilling portrayal of how a totalitarian regime controls information and crushes individuality.",
+    "pages": 328,
+    "language": "English",
+    "coverImage": "/images/covers/1984.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "New edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-04-15"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Highlighting on first chapter"
+      },
+      {
+        "condition": "poor",
+        "status": "available",
+        "note": "Water damage on last 20 pages"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Reserved for book club"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "2022 reprint"
+      }
+    ],
+    "tags": ["dystopia", "totalitarianism", "surveillance"],
+    "restricted": false,
+    "createdAt": "2023-01-20T14:25:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1c"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "ISBN": "978-0141439518",
+    "publisher": "Penguin Classics",
+    "publicationYear": 1813,
+    "genre": ["Fiction", "Classics", "Romance"],
+    "description": "The story follows Elizabeth Bennet as she deals with issues of manners, upbringing, morality, education, and marriage.",
+    "pages": 432,
+    "language": "English",
+    "coverImage": "/images/covers/pride-prejudice.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Hardcover edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-04-02"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Annotated edition"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Some dog-eared pages"
+      },
+      {
+        "condition": "poor",
+        "status": "available",
+        "note": "Cover detached but complete"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Illustrated edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-05-10"
+      }
+    ],
+    "tags": ["regency", "marriage", "social criticism"],
+    "restricted": false,
+    "createdAt": "2023-01-22T09:40:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1b"
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "ISBN": "978-0547928227",
+    "publisher": "Houghton Mifflin Harcourt",
+    "publicationYear": 1937,
+    "genre": ["Fiction", "Fantasy", "Adventure"],
+    "description": "The journey of Bilbo Baggins, who is swept into an epic quest to reclaim the dwarf kingdom of Erebor from the dragon Smaug.",
+    "pages": 366,
+    "language": "English",
+    "coverImage": "/images/covers/hobbit.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Paperback edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "75th anniversary edition"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Due back 2025-04-25"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Illustrated edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-04-05"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Movie tie-in edition"
+      }
+    ],
+    "tags": ["dragons", "adventure", "middle-earth"],
+    "restricted": false,
+    "createdAt": "2023-01-25T16:15:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1d"
   },
   {
     "title": "Dune",
     "author": "Frank Herbert",
-    "ISBN": "978-0-441-17271-9",
+    "ISBN": "978-0441172719",
     "publisher": "Ace Books",
     "publicationYear": 1965,
-    "genre": ["Science Fiction", "Fantasy", "Adventure"],
-    "description": "Set in the distant future amidst a feudal interstellar society, Dune tells the story of young Paul Atreides, whose family accepts the stewardship of the desert planet Arrakis.",
+    "genre": ["Science Fiction", "Fantasy"],
+    "description": "Set on the desert planet Arrakis, Dune tells the story of Paul Atreides as he leads a rebellion against the imperial forces that destroyed his family.",
     "pages": 688,
     "language": "English",
-    "coverImage": "https://images.unsplash.com/photo-1604169694058-13ebc4e2d711",
+    "coverImage": "/images/covers/dune.jpg",
     "copies": [
-      { "condition": "good", "status": "available" },
-      { "condition": "good", "status": "available" },
-      { "condition": "fair", "status": "available" }
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "50th anniversary edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-05-20"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Original cover art"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-04-12"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Deluxe hardcover"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "2021 movie tie-in"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Missing pages 400-405"
+      }
     ],
-    "tags": ["space opera", "desert planet", "political intrigue", "messiah"]
+    "tags": ["space", "politics", "ecology"],
+    "restricted": false,
+    "createdAt": "2023-02-05T11:30:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1c"
+  },
+  {
+    "title": "One Hundred Years of Solitude",
+    "author": "Gabriel García Márquez",
+    "ISBN": "978-0060883287",
+    "publisher": "Harper Perennial",
+    "publicationYear": 1967,
+    "genre": ["Fiction", "Magic Realism", "Literary Fiction"],
+    "description": "The multi-generational story of the Buendía family in the fictional town of Macondo.",
+    "pages": 417,
+    "language": "English",
+    "coverImage": "/images/covers/hundred-years.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "English translation"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Commemorative edition"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Due back 2025-04-30"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "For literature class"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Paperback"
+      }
+    ],
+    "tags": ["magical realism", "colombian", "family saga"],
+    "restricted": false,
+    "createdAt": "2023-02-10T13:45:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1d"
+  },
+  {
+    "title": "Atomic Physics: Advanced Research Articles",
+    "author": "Various Scientists",
+    "ISBN": "978-0789123456",
+    "publisher": "Cambridge Scientific Press",
+    "publicationYear": 2021,
+    "genre": ["Academic", "Physics", "Science"],
+    "description": "Collection of cutting-edge research papers on atomic physics with restricted access due to sensitive content.",
+    "pages": 580,
+    "language": "English",
+    "coverImage": "/images/covers/atomic-physics.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Reference only"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "First edition, signed by editor"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "For physics department"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "With supplemental materials"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-04-10, faculty only"
+      }
+    ],
+    "tags": ["physics", "research", "scientific"],
+    "restricted": true,
+    "createdAt": "2023-03-01T10:10:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1e"
+  },
+  {
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "ISBN": "978-0062316097",
+    "publisher": "Harper",
+    "publicationYear": 2014,
+    "genre": ["Non-fiction", "History", "Science"],
+    "description": "A survey of the history of humankind from the evolution of archaic human species to the 21st century.",
+    "pages": 464,
+    "language": "English",
+    "coverImage": "/images/covers/sapiens.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "First edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-05-05"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Illustrated edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Hardcover"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Due back 2025-04-20"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Paperback, 2018 printing"
+      }
+    ],
+    "tags": ["anthropology", "human evolution", "civilization"],
+    "restricted": false,
+    "createdAt": "2023-02-15T15:20:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1c"
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "ISBN": "978-0062315007",
+    "publisher": "HarperOne",
+    "publicationYear": 1988,
+    "genre": ["Fiction", "Philosophy", "Fantasy"],
+    "description": "A fable about following your dreams and listening to your heart.",
+    "pages": 208,
+    "language": "English",
+    "coverImage": "/images/covers/alchemist.jpg",
+    "copies": [
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "25th anniversary edition"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Gift edition with gold embossing"
+      },
+      {
+        "condition": "fair",
+        "status": "available",
+        "note": "Due back 2025-04-18"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Paperback"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "For book club"
+      },
+      {
+        "condition": "good",
+        "status": "available",
+        "note": "Due back 2025-05-10"
+      }
+    ],
+    "tags": ["quest", "self-discovery", "philosophy"],
+    "restricted": false,
+    "createdAt": "2023-02-20T09:10:00Z",
+    "createdBy": "60d5ec9c9b1d8e2b9c7e8f1d"
   }
 ]
